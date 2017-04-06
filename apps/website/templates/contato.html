@@ -17,9 +17,9 @@
 
 <div id="fh5co-contact" class="animate-box">
 	<div class="container">
-		<form action="#">
+		<form class="form-contato">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<h3 class="section-title">Nosso Endereço</h3>
 					<ul class="contact-info">
 						<li><i class="icon-location-pin"></i>End. Rua Adelino Alves Saldanha, 562, Cedro - Areal - RJ</li>
@@ -28,21 +28,26 @@
 						<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
 					</ul>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Nome">
+								{{ form.nome }}
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Email">
+								{{ form.telefone }}
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Mensagem"></textarea>
+								{{ form.email }}
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<textarea name="descricao" class="form-control" id="" cols="30" rows="7" placeholder="Mensagem"></textarea>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -66,4 +71,17 @@
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
 <script src="/static/site/js/google_map.js"></script>
+<script type="text/javascript">
+$('.form-contato').validate({
+	messages: {
+        'NOTEMPTY': 'Por favor, preencha este campo.'
+    },
+    submit: {
+        settings: {
+			inputContainer : '.form-group',
+			errorListClass : 'form-error'
+        }
+    }
+});
+</script>
 {% endblock %}
