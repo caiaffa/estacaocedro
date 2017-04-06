@@ -18,5 +18,14 @@ class Home(View):
 class Contato(View):
 	def get(self, request):
 		form = ContatoForm
-		context = {'form':form}
+		context = {'form':form, 'message':False}
+		return render (request, 'contato.html', context)
+
+	def post(self, request, *args, **kwargs):
+		form = ContatoForm(request.POST)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.save()
+		form = ContatoForm()
+		context = {'form':form, 'message':True}
 		return render (request, 'contato.html', context)
