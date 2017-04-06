@@ -17,7 +17,15 @@
 
 <div id="fh5co-contact" class="animate-box">
 	<div class="container">
-		<form class="form-contato">
+		{% if message %}
+		<div class="row">
+			<div class="col-md-12 text-center heading-section">
+				<h3>Obrigado pelo contato.</h3>
+				<p>Retornaremos o mais breve possível. Se preferir, ligue para (24) 99238-3471.</p>
+			</div>
+		</div>
+		{% endif %}
+		<form class="form-contato" autocomplete="off" method="post" enctype="multipart/form-data" role="form">{% csrf_token %}
 			<div class="row">
 				<div class="col-md-5">
 					<h3 class="section-title">Nosso Endereço</h3>
