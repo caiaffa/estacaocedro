@@ -5,11 +5,10 @@
 
 <div class="fh5co-hero">
 	<div class="fh5co-overlay"></div>
-	<div class="fh5co-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_2.jpg);">
+	<div class="fh5co-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url(/static/site/images/cover_bg_2.jpg);">
 		<div class="desc animate-box">
-			<h2><strong>Contact</strong> Us</h2>
-			<span>HandCrafted by <a href="http://frehtml5.co/" target="_blank" class="fh5co-site-name">FreeHTML5.co</a></span>
-			<span><a class="btn btn-primary btn-lg" href="#">Donate Now</a></span>
+			<h2>Para<strong> doações e dúvidas</strong> entre em contato.</h2>
+			<span><a class="btn btn-primary btn-lg find-contato" href="#">Contato</a></span>
 		</div>
 	</div>
 
@@ -25,7 +24,7 @@
 			</div>
 		</div>
 		{% endif %}
-		<form class="form-contato" autocomplete="off" method="post" enctype="multipart/form-data" role="form">{% csrf_token %}
+		<form id="form-contato" class="form-contato" autocomplete="off" method="post" enctype="multipart/form-data" role="form">{% csrf_token %}
 			<div class="row">
 				<div class="col-md-5">
 					<h3 class="section-title">Nosso Endereço</h3>
@@ -90,6 +89,13 @@ $('.form-contato').validate({
 			errorListClass : 'form-error'
         }
     }
+});
+
+$(function(){
+	$('.find-contato').click(function(event){
+		event.preventDefault()
+	    $('html,body').animate({scrollTop: $("#form-contato").offset().top - 200},'slow');
+	});
 });
 </script>
 {% endblock %}
