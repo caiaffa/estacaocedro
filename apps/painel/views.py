@@ -36,6 +36,24 @@ class PublicacaoRegister(View):
         else:
             return render (request, 'publicacao/register.html', context)
 
+class PublicacaoEdit(View):
+    def get(self, request, pk):
+        publicacao = Publicacao.objects.get(pk=pk)
+        form = PublicacaoForm(instance=publicacao)
+        context = {'form':form, 'publicacao':publicacao}
+        return render (request, 'publicacao/edit.html', context)
+
+    def post(self, request, pk):
+        form = PublicacaoForm(request.POST, request.FILES)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:publicacao-listar"))
+        else:
+            return render (request, 'publicacao/edit.html', context)
+
 class PublicacaoList(View):
     def get(self, request):
         publicacoes = Publicacao.objects.all()
@@ -46,7 +64,7 @@ class PublicacaoDelete(View):
     def get(self, request, pk):
         publicacao = Publicacao.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:publicacao-listar"))
-        
+
 
 class ContatoList(View):
     def get(self, request):
