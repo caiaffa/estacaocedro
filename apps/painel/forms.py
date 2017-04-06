@@ -8,4 +8,4 @@ class PublicacaoForm(forms.Form):
 	conteudo = forms.CharField(label='Conteúdo', widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
 	def __init__(self, *args, **kwargs):
-		super(PublicacaoForm, self).__init__(*args, *kwargs)
+		super(PublicacaoForm, self).__init__(*args, **kwargs)
