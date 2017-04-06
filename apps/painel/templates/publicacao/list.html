@@ -12,7 +12,7 @@
 			<div class="sortable" data-sortable-id="2" aria-dropeffect="move">
 				<section class="box-typical task-card task" data-item-sortable-id="2" draggable="true" role="option" aria-grabbed="false">
 					<div class="task-card-photo">
-						<img src="/media/{{publicacao.imagem}}" alt="{{publicacao.titulo}}">
+						<img height=150 src="/media/{{publicacao.imagem}}" alt="{{publicacao.titulo}}">
 					</div>
 					<div class="task-card-in">
 						<div class="btn-group task-card-menu">
@@ -20,7 +20,7 @@
 								<i class="font-icon-dots-vert-square"></i>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="/painel/publicacao/editar/{{publicacao.pk}}">
 									<i class="font-icon font-icon-pencil"></i>
 									Edit
 								</a>
