@@ -4,5 +4,6 @@ from django.contrib.auth.decorators import login_required
 from apps.painel import views 
 
 urlpatterns = [
-    url(r'^publicacao/cadastrar/$', views.PublicacaoRegister.as_view(), name='publicacao_register'),
+	url(r'^$', views.Home.as_view(), name='home'),
+    url(r'^publicacao/cadastrar/$', views.PublicacaoRegister.as_view(), name='publicacao-cadastrar'),
 ]

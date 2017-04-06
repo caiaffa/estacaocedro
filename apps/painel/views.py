@@ -9,6 +9,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import PublicacaoForm
 import json
 
+class Home(View):
+    def get(self, request):
+        return render (request, 'core/index.html')
 
 class PublicacaoRegister(View):
     def get(self, request):
