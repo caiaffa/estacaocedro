@@ -9,7 +9,8 @@ urlpatterns = [
 	# URLS PUBLICAÇÃO
 	url(r'^publicacao/$', login_required(views.PublicacaoList.as_view()), name='publicacao-listar'),
     url(r'^publicacao/cadastrar/$', login_required(views.PublicacaoRegister.as_view()), name='publicacao-cadastrar'),
-    
+    url(r'^publicacao/deletar/(?P<pk>\d+)/$', views.PublicacaoDelete.as_view(), name='publicacao-deletar'),
+
     # URLS CONTATO
     url(r'^mensagem/$', views.ContatoList.as_view(), name='contato-listar'),
     url(r'^mensagem/visualizar/(?P<pk>\d+)/$', views.ContatoDetail.as_view(), name='contato-detalhes'),

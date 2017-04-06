@@ -29,31 +29,24 @@ class PublicacaoRegister(View):
         form = PublicacaoForm(request.POST, request.FILES)
         context = {'form':form}
         if form.is_valid():
-            publicacao = Publicacao()
-            publicacao.usuario = request.user
-            publicacao.titulo = request.POST.get('titulo')
-            publicacao.imagem = request.FILES.get('imagem')
-            publicacao.conteudo = request.POST.get('conteudo')
-            publicacao.save()
-            return redirect(reverse_lazy("publicacao-list"))
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:publicacao-listar"))
         else:
             return render (request, 'publicacao/register.html', context)
 
 class PublicacaoList(View):
     def get(self, request):
-        obj_list = Publicacao.objects.all()
-
-        paginator = Paginator(obj_list, 25)
-        page = request.GET.get('page')
-        try:
-            publicacoes = paginator.page(page)
-        except PageNotAnInteger:
-            publicacoes = paginator.page(1)
-        except EmptyPage:
-            publicacoes = paginator.page(paginator.num_pages)
+        publicacoes = Publicacao.objects.all()
         context = {'publicacoes': publicacoes}
         return render(request, 'publicacao/list.html', context)
 
+class PublicacaoDelete(View):
+    def get(self, request, pk):
+        publicacao = Publicacao.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:publicacao-listar"))
+        
 
 class ContatoList(View):
     def get(self, request):

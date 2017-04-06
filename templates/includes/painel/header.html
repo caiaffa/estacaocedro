@@ -1,6 +1,6 @@
 <header class="site-header">
 	    <div class="container-fluid">
-	        <a href="/appexemplo/ ^list/" class="site-logo">
+	        <a href="/painel/" class="site-logo">
 	            <img class="hidden-md-down" src="/static/painel/build/img/logo-2.png" alt="">
 	            <img class="hidden-lg-up" src="/static/painel/build/img/logo-2-mob.png" alt="">
 	        </a>
@@ -38,17 +38,16 @@
 	                                <span class="lb">Gerência</span>
 	                            </a>
 	                            <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
-	                                <a class="dropdown-item" href="#">Crud Modelo</a>
 	                                <a class="dropdown-item" href="{% url 'painel:contato-listar' %}">Mensagens</a>
+	                                <a class="dropdown-item" href="{% url 'painel:publicacao-listar' %}">Publicações</a>
 	                            </div>
 	                        </div>
-
 	                        <div class="dropdown">
 	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                Adicionar
 	                            </button>
 	                            <div class="dropdown-menu" aria-labelledby="dd-header-add">
-	                                <a class="dropdown-item" href="/appexemplo/create/">Modelo</a>
+	                                <a class="dropdown-item" href="{% url 'painel:publicacao-cadastrar' %}">Publicações</a>
 	                            </div>
 	                        </div>
 	                        <!--.help-dropdown-->
