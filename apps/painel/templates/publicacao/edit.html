@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/painel/build/css/separate/pages/editor.min.css">
 {% endblock %}
 {% block content %}
-<form id="form_publicacao" name="form_publicacao" action="/painel/publicacao/cadastrar/" method="post" enctype="multipart/form-data">
+<form id="form_publicacao" name="form_publicacao" action="/painel/publicacao/editar/{{publicacao.pk}}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 	<div class="box-typical box-typical-padding">
 		<div class="row">
@@ -89,11 +89,14 @@
 {% endblock %}
 {% block javascript %}
 <script src="/static/painel/build/js/lib/summernote/summernote.min.js"></script>
+<script src="/static/painel/build/js/lib/summernote/lang_pt-br.js"></script>
 <script>
 	$(document).ready(function(){
 		$('.summernote').summernote({
+			lang:'pt-BR',
 			height:500,
 		});
+		$('.summernote').summernote('code', '{{publicacao.conteudo}}');
 	});
 	$('.btn-save').on('click', function(event){
 		$('#{{form.conteudo.id_for_label}}').val($('.summernote').summernote('code'));
