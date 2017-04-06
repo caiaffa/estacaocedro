@@ -3,9 +3,9 @@ from .base import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'root',
-        'USER': '',
-        'PASSWORD': 'admin123',
+        'NAME': 'estacaocedro',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': ''
     }
 }
