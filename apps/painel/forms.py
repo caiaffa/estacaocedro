@@ -1,10 +1,10 @@
 from django import forms
 from .models import Publicacao
 
-class PublicacaoForm(forms.Form):
-	titulo = forms.CharField(label='Título')
-	imagem = forms.ImageField(label='Imagem')
-	conteudo = forms.CharField(label='Conteúdo', widget=forms.Textarea)
+class PublicacaoForm(forms.ModelForm):
+	class Meta:
+		model = Publicacao
+		fields = ['titulo', 'imagem', 'conteudo']
 
 	def __init__(self, *args, **kwargs):
 		super(PublicacaoForm, self).__init__(*args, **kwargs)
