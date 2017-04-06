@@ -10,8 +10,9 @@ DATABASES = {
     }
 }
 
-#INSTALLED_APPS += ('debug_toolbar',)
+INSTALLED_APPS += (
+	#'debug_toolbar',
+	'tinymce',
+)
 
-#INTERNAL_IPS = ('127.0.0.1')
-
-
+INTERNAL_IPS = ('127.0.0.1')
