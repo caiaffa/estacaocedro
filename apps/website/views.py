@@ -12,3 +12,7 @@ import json
 class Home(View):
     def get(self, request):
         return render (request, 'index.html')
+
+class Contato(View):
+    def get(self, request):
+        return render (request, 'contato.html')
