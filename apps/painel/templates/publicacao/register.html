@@ -1,0 +1,13 @@
+{% extends 'painel/base.html' %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="/static/painel/build/css/separate/pages/others.min.css">
+<link rel="stylesheet" href="/static/painel/build/css/lib/bootstrap-table/bootstrap-table.min.css">
+{% endblock %}
+{% block content %}
+<form action="" method="post">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" value="Salvar" />
+</form>
+{% endblock %}

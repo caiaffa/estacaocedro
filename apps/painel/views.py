@@ -9,6 +9,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 from apps.website.models import Contato
+from apps.website.forms import ContatoForm
+from .models import Publicacao
 from .forms import PublicacaoForm
 
 
@@ -19,13 +21,43 @@ class Home(View):
 
 class PublicacaoRegister(View):
     def get(self, request):
-    	form = PublicacaoForm()
-    	return render (request, 'publicacao_register.html', {'form':form})
+        form = PublicacaoForm()
+        context = {'form':form}
+        return render (request, 'publicacao/register.html', context)
+
+    def post(self, request):
+        form = PublicacaoForm(request.POST, request.FILES)
+        context = {'form':form}
+        if form.is_valid():
+            publicacao = Publicacao()
+            publicacao.usuario = request.user
+            publicacao.titulo = request.POST.get('titulo')
+            publicacao.imagem = request.FILES.get('imagem')
+            publicacao.conteudo = request.POST.get('conteudo')
+            publicacao.save()
+            return redirect(reverse_lazy("publicacao-list"))
+        else:
+            return render (request, 'publicacao/register.html', context)
+
+class PublicacaoList(View):
+    def get(self, request):
+        obj_list = Publicacao.objects.all()
+
+        paginator = Paginator(obj_list, 25)
+        page = request.GET.get('page')
+        try:
+            publicacoes = paginator.page(page)
+        except PageNotAnInteger:
+            publicacoes = paginator.page(1)
+        except EmptyPage:
+            publicacoes = paginator.page(paginator.num_pages)
+        context = {'publicacoes': publicacoes}
+        return render(request, 'publicacao/list.html', context)
 
 
 class ContatoList(View):
     def get(self, request):
-        obj_list = Contato.objects.all()
+        obj_list = Contato.objects.all().order_by('data')
 
         paginator = Paginator(obj_list, 25)
         page = request.GET.get('page')
@@ -37,3 +69,23 @@ class ContatoList(View):
             contatos = paginator.page(paginator.num_pages)
         context = {'contatos': contatos}
         return render(request, 'contato/list.html', context)
+
+class ContatoDetail(View):
+    def get(self, request, pk):
+        contato = Contato.objects.get(pk=pk)
+        contato.is_visualizada = True
+        contato.save()
+        form = ContatoForm(instance=contato)
+        form.fields['nome'].widget.attrs['disabled'] = True
+        form.fields['telefone'].widget.attrs['disabled'] = True
+        form.fields['email'].widget.attrs['disabled'] = True
+        form.fields['descricao'].widget.attrs['disabled'] = True
+
+        context = {'form':form, 'contato':pk}
+        return render (request, 'contato/detail.html', context)
+
+class ContatoDelete(View):
+    def get(self, request, pk):
+        contato = Contato.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:contato-listar"))
+    

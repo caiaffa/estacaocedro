@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from tinymce.models import HTMLField
+from django.contrib.auth.models import User
 
 class Publicacao(models.Model):
 	id = models.AutoField(primary_key=True)
+	usuario = models.ForeignKey(User)
 	titulo = models.CharField('Título', max_length=50, unique=True)
 	imagem = models.ImageField('Imagem')
 	conteudo = models.CharField('Conteúdo', max_length=5000)
