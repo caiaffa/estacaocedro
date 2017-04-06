@@ -1,4 +1,5 @@
 from .base import *
+import os
 
 DATABASES = {
     'default': {
@@ -16,3 +17,5 @@ INSTALLED_APPS += (
 )
 
 INTERNAL_IPS = ('127.0.0.1')
+
+ALLOWED_HOSTS = ('*')
