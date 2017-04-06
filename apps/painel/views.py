@@ -7,8 +7,10 @@ from django.http import (JsonResponse, HttpResponse, HttpResponseForbidden, Http
 from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
-from apps.painel.models import Publicacao
+
 from apps.website.models import Contato
+from apps.website.forms import ContatoForm
+from .models import Publicacao
 from .forms import PublicacaoForm
 
 
@@ -55,7 +57,7 @@ class PublicacaoList(View):
 
 class ContatoList(View):
     def get(self, request):
-        obj_list = Contato.objects.all()
+        obj_list = Contato.objects.all().order_by('data')
 
         paginator = Paginator(obj_list, 25)
         page = request.GET.get('page')
@@ -67,3 +69,23 @@ class ContatoList(View):
             contatos = paginator.page(paginator.num_pages)
         context = {'contatos': contatos}
         return render(request, 'contato/list.html', context)
+
+class ContatoDetail(View):
+    def get(self, request, pk):
+        contato = Contato.objects.get(pk=pk)
+        contato.is_visualizada = True
+        contato.save()
+        form = ContatoForm(instance=contato)
+        form.fields['nome'].widget.attrs['disabled'] = True
+        form.fields['telefone'].widget.attrs['disabled'] = True
+        form.fields['email'].widget.attrs['disabled'] = True
+        form.fields['descricao'].widget.attrs['disabled'] = True
+
+        context = {'form':form, 'contato':pk}
+        return render (request, 'contato/detail.html', context)
+
+class ContatoDelete(View):
+    def get(self, request, pk):
+        contato = Contato.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:contato-listar"))
+    
