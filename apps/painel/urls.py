@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^publicacao/cadastrar/$', login_required(views.PublicacaoRegister.as_view()), name='publicacao-cadastrar'),
     
     # URLS CONTATO
-    url(r'^contato/$', views.ContatoList.as_view(), name='contato-listar'),
+    url(r'^mensagem/$', views.ContatoList.as_view(), name='contato-listar'),
+    url(r'^mensagem/visualizar/(?P<pk>\d+)/$', views.ContatoDetail.as_view(), name='contato-detalhes'),
+    url(r'^mensagem/deletar/(?P<pk>\d+)/$', views.ContatoDelete.as_view(), name='contato-deletar'),
 ]
