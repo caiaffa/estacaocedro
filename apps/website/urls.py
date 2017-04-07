@@ -5,5 +5,6 @@ from apps.website import views
 
 urlpatterns = [
     url(r'^$', views.Home.as_view(), name='home'),
+    url(r'^noticia/(?P<pk>\d+)/$', views.Noticias.as_view(), name='noticia'),
     url(r'^contato/$', views.Contato.as_view(), name='contato'),
 ]

@@ -9,11 +9,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 from .forms import ContatoForm
-
+from apps.painel.models import Publicacao
 
 class Home(View):
     def get(self, request):
-        return render (request, 'index.html')
+    	publicacoes = Publicacao.objects.all().order_by('data')[:3]
+    	context = {'publicacoes':publicacoes}
+    	return render (request, 'index.html', context)
+
+class Noticias(View):
+	def get(self, request, pk):
+		publicacao = Publicacao.objects.get(pk=pk)
+		context = {'publicacao':publicacao}
+		return render(request, 'noticia.html', context)
 
 class Contato(View):
 	def get(self, request):
