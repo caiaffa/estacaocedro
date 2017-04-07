@@ -15,3 +15,6 @@ class PublicacaoForm(forms.ModelForm):
 		self.fields['titulo'].widget.attrs['placeholder'] = 'Título da publicação'
 		self.fields['imagem'].widget.attrs['placeholder'] = 'Imagem de capa da publicação'
 		self.fields['conteudo'].widget.attrs['placeholder'] = 'Conteúdo da publicação'
+
+		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['conteudo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
