@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/painel/build/css/separate/pages/editor.min.css">
 {% endblock %}
 {% block content %}
-<form id="form_publicacao" name="form_publicacao" action="/painel/publicacao/editar/{{publicacao.pk}}" method="post" enctype="multipart/form-data">
+<form id="form_publicacao" name="form_publicacao" action="/painel/publicacao/editar/{{publicacao.pk}}/" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 	<div class="box-typical box-typical-padding">
 		<div class="row">
@@ -74,7 +74,6 @@
 					<div class="col-lg-12">
 						<div class="form-group">
 							<button class="btn btn-save" type="button">Salvar</button>
-							<button class="btn btn-secondary btn-save-more" type="submit">Salvar e criar nova publicação</button>
 							<div class="pull-right">
 								<a class="btn btn-secondary-outline" href="/painel/publicacao/">Lista de publicações</a>
 							</div>
@@ -99,6 +98,7 @@
 		$('.summernote').summernote('code', '{{publicacao.conteudo}}');
 	});
 	$('.btn-save').on('click', function(event){
+		$('#add_outro').val('');
 		$('#{{form.conteudo.id_for_label}}').val($('.summernote').summernote('code'));
 		$('#form_publicacao').submit();
 	});
