@@ -7,7 +7,7 @@ class Publicacao(models.Model):
 	usuario = models.ForeignKey(User)
 	titulo = models.CharField('Título', max_length=50, unique=True)
 	imagem = models.ImageField('Imagem')
-	conteudo = models.CharField('Conteúdo', max_length=5000)
+	conteudo = models.CharField('Conteúdo', max_length=5000000)
 	data = models.DateTimeField('Data de Publicação', default=timezone.now)
 
 	def __str__(self):
