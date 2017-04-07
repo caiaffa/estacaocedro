@@ -47,7 +47,8 @@ class PublicacaoEdit(View):
         return render (request, 'publicacao/edit.html', context)
 
     def post(self, request, pk):
-        form = PublicacaoForm(request.POST, request.FILES)
+        publicacao = Publicacao.objects.get(pk=pk)
+        form = PublicacaoForm(request.POST, request.FILES, instance=publicacao)
         context = {'form':form}
         if form.is_valid():
             obj = form.save(commit=False)
