@@ -32,7 +32,10 @@ class PublicacaoRegister(View):
             obj = form.save(commit=False)
             obj.usuario = request.user
             obj.save()
-            return redirect(reverse_lazy("painel:publicacao-listar"))
+            if request.POST.get('add_outro'):
+                return redirect(reverse_lazy("painel:publicacao-cadastrar"))
+            else:
+                return redirect(reverse_lazy("painel:publicacao-listar"))
         else:
             return render (request, 'publicacao/register.html', context)
 

@@ -70,6 +70,8 @@
 					</div>
 				</div>
 
+				<input id="add_outro" name="add_outro" type="hidden"/>
+
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-group">
@@ -96,6 +98,12 @@
 		});
 	});
 	$('.btn-save').on('click', function(event){
+		$('#add_outro').val('');
+		$('#{{form.conteudo.id_for_label}}').val($('.summernote').summernote('code'));
+		$('#form_publicacao').submit();
+	});
+	$('.btn-save-more').on('click', function(event){
+		$('#add_outro').val('Adicionar Outro');
 		$('#{{form.conteudo.id_for_label}}').val($('.summernote').summernote('code'));
 		$('#form_publicacao').submit();
 	});
