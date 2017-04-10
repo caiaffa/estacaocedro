@@ -18,11 +18,27 @@ class Home(View):
     	context = {'publicacoes':publicacoes, 'projetos':projetos}
     	return render (request, 'index.html', context)
 
-class Noticias(View):
+class Sobre(View):
+    def get(self, request):
+    	context = {}
+    	return render (request, 'sobre.html', context) 
+
+class Participe(View):
+    def get(self, request):
+    	context = {}
+    	return render (request, 'participe.html', context)   	
+
+class Noticia(View):
 	def get(self, request, pk):
 		publicacao = Publicacao.objects.get(pk=pk)
 		context = {'publicacao':publicacao}
 		return render(request, 'noticia.html', context)
+
+class ListaNoticias(View):
+	def get(self, request):
+		publicacoes = Publicacao.objects.all()
+		context = {'publicacoes':publicacoes}
+		return render(request, 'listanoticias.html', context)
 
 class Contato(View):
 	def get(self, request):
