@@ -23,3 +23,20 @@ class Projeto(models.Model):
 
 	def __str__(self):
 	    return str(self.titulo)
+
+
+class Album(models.Model):
+	usuario = models.ForeignKey(User)
+	titulo = models.CharField('Título', max_length=50, unique=True)
+	data_album = models.DateField('Data do Evento')
+	data = models.DateTimeField('Data de Criação', default=timezone.now)
+
+	def __str__(self):
+	    return str(self.titulo)
+
+
+class Imagem(models.Model):
+	album = models.ForeignKey(Album)
+	imagem = models.ImageField('Foto')
+
+
