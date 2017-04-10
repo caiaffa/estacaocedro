@@ -19,4 +19,10 @@ urlpatterns = [
     url(r'^mensagem/$', views.ContatoList.as_view(), name='contato-listar'),
     url(r'^mensagem/visualizar/(?P<pk>\d+)/$', views.ContatoDetail.as_view(), name='contato-detalhes'),
     url(r'^mensagem/deletar/(?P<pk>\d+)/$', views.ContatoDelete.as_view(), name='contato-deletar'),
+
+    # URLS PROJETO
+    url(r'^projeto/$', login_required(views.ProjetoList.as_view()), name='projeto-listar'),
+    url(r'^projeto/cadastrar/$', login_required(views.ProjetoRegister.as_view()), name='projeto-cadastrar'),
+    url(r'^projeto/editar/(?P<pk>\d+)/$', views.ProjetoEdit.as_view(), name='projeto-editar'),
+    url(r'^projeto/deletar/(?P<pk>\d+)/$', views.ProjetoDelete.as_view(), name='projeto-deletar'),
 ]
