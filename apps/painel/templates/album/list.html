@@ -1,0 +1,378 @@
+{% extends 'painel/base.html' %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="/static/painel/build/css/separate/pages/others.min.css">
+<link rel="stylesheet" href="/static/painel/build/css/separate/pages/tasks.min.css">
+<link rel="stylesheet" href="/static/painel/build/css/separate/pages/gallery.min.css">
+{% endblock %}
+{% block content %}
+{% if not publicacoes %}
+<div class="tasks-grid">
+	<section class="box-typical box-typical-full-height-with-header">
+		<header class="box-typical-header box-typical-header-bordered">
+			<div class="tbl-row">
+				<div class="tbl-cell tbl-cell-title">
+					<h3>Album</h3>
+				</div>
+				<div class="tbl-cell tbl-cell-actions">
+					<button class="action-btn view active" type="button">
+						<i class="font-icon font-icon-view-grid"></i>
+					</button>
+					<button class="action-btn view" type="button">
+						<i class="font-icon font-icon-view-rows"></i>
+					</button>
+					<button class="action-btn view" type="button">
+						<i class="font-icon font-icon-view-cascade"></i>
+					</button>
+				</div>
+			</div>
+		</header>
+		<div class="box-typical-body">
+			<div class="gallery-grid">
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="/static/painel/img/gall-img-1.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="/static/painel/img/gall-img-2.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="/static/painel/img/gall-img-3.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-4.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-5.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-6.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-7.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<div class="gallery-doc">
+							<div class="gallery-doc-in">
+								<i class="font-icon font-icon-page"></i>
+								<p>Instructions.txt</p>
+							</div>
+						</div>
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-1.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-2.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-3.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-4.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-5.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-6.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-ok"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-del"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+				<div class="gallery-col">
+					<article class="gallery-item" style="height: 158px;">
+						<img height="158" alt="" src="img/gall-img-7.jpg" class="gallery-picture">
+						<div class="gallery-hover-layout">
+							<div class="gallery-hover-layout-in">
+								<p class="gallery-item-title">The boxed castle the boxed castle the boxed castle the boxed castle the boxed castle the</p>
+								<p>by Alban Wamigo</p>
+								<div class="btn-group">
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-cloud"></i>
+									</button>
+									<button class="btn" type="button">
+										<i class="font-icon font-icon-trash"></i>
+									</button>
+								</div>
+								<p>3 days ago</p>
+							</div>
+						</div>
+					</article>
+				</div><!--.gallery-col-->
+
+			</div><!--.gallery-grid-->
+		</div><!--.box-typical-body-->
+	</section>
+</div>
+{% else %}
+<div class="box-typical box-typical-full-height" style="min-height: 444px;">
+	<div class="add-model-screen tbl" style="height: 444px;">
+		<div class="add-model-screen-in">
+			<div class="add-model-screen-user">
+				<i class="font-icon font-icon-user"></i>
+			</div>
+			<h2>Aqui serão listadas suas publicações</h2>
+			<p class="lead color-blue-grey-lighter">
+				Parece que você ainda não tem nenhuma
+				<br>
+				<b>Publicação</b> cadastrada.
+			</p>
+			<!--<a href="" class="btn"></a>-->
+		</div>
+	</div>
+</div><!--.box-typical-->
+{% endif %}
+{% endblock %}
+{% block javascript %}
+<script src="/static/painel/build/js/lib/bootstrap-table/bootstrap-table.js"></script>
+<script src="/static/painel/build/js/lib/bootstrap-table/bootstrap-table-init.js"></script>
+{% endblock %}
