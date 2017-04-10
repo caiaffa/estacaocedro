@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^projeto/cadastrar/$', login_required(views.ProjetoRegister.as_view()), name='projeto-cadastrar'),
     url(r'^projeto/editar/(?P<pk>\d+)/$', views.ProjetoEdit.as_view(), name='projeto-editar'),
     url(r'^projeto/deletar/(?P<pk>\d+)/$', views.ProjetoDelete.as_view(), name='projeto-deletar'),
+
+    # URLS ALBUM
+    url(r'^album/$', login_required(views.AlbumList.as_view()), name='album-listar'),
 ]

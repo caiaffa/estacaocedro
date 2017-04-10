@@ -11,7 +11,7 @@ import json
 
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
-from .models import Publicacao, Projeto
+from .models import Publicacao, Projeto, Imagem, Album
 from .forms import PublicacaoForm, LoginForm, ProjetoForm
 
 
@@ -157,7 +157,7 @@ class ProjetoEdit(View):
 
     def post(self, request, pk):
         projeto = Projeto.objects.get(pk=pk)
-        form = PublicacaoForm(request.POST, request.FILES, instance=projeto)
+        form = ProjetoForm(request.POST, request.FILES, instance=projeto)
         context = {'form':form}
         if form.is_valid():
             obj = form.save(commit=False)
@@ -186,3 +186,9 @@ class ProjetoDelete(View):
     def get(self, request, pk):
         projeto = Projeto.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:projeto-listar"))
+
+class AlbumList(View):
+    def get(self, request):
+        imagens = Imagem.objects.all()
+        context = {'imagens': imagens}
+        return render(request, 'album/list.html', context)
