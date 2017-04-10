@@ -11,8 +11,8 @@ import json
 
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
-from .models import Publicacao
-from .forms import PublicacaoForm, LoginForm
+from .models import Publicacao, Projeto
+from .forms import PublicacaoForm, LoginForm, ProjetoForm
 
 
 class Home(View):
@@ -94,6 +94,7 @@ class PublicacaoDelete(View):
         return redirect(reverse_lazy("painel:publicacao-listar"))
 
 
+
 class ContatoList(View):
     def get(self, request):
         obj_list = Contato.objects.all().order_by('data')
@@ -128,3 +129,60 @@ class ContatoDelete(View):
         contato = Contato.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:contato-listar"))
     
+
+
+class ProjetoRegister(View):
+    def get(self, request):
+        form = ProjetoForm()
+        context = {'form':form}
+        return render (request, 'projeto/register.html', context)
+
+    def post(self, request):
+        form = ProjetoForm(request.POST, request.FILES)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:projeto-listar"))
+        else:
+            return render (request, 'projeto/register.html', context)
+
+class ProjetoEdit(View):
+    def get(self, request, pk):
+        projeto = Projeto.objects.get(pk=pk)
+        form = ProjetoForm(instance=projeto)
+        context = {'form':form, 'projeto':projeto}
+        return render (request, 'projeto/edit.html', context)
+
+    def post(self, request, pk):
+        projeto = Projeto.objects.get(pk=pk)
+        form = PublicacaoForm(request.POST, request.FILES, instance=projeto)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:projeto-listar"))
+        else:
+            return render (request, 'projeto/edit.html', context)
+
+class ProjetoList(View):
+    def get(self, request):
+        obj_list = Projeto.objects.all().order_by('-data')
+
+        paginator = Paginator(obj_list, 25)
+        page = request.GET.get('page')
+        try:
+            projetos = paginator.page(page)
+        except PageNotAnInteger:
+            projetos = paginator.page(1)
+        except EmptyPage:
+            projetos = paginator.page(paginator.num_pages)
+        context = {'projetos': projetos}
+        return render(request, 'projeto/list.html', context)
+
+class ProjetoDelete(View):
+    def get(self, request, pk):
+        projeto = Projeto.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:projeto-listar"))

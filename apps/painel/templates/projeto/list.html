@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/painel/build/css/lib/bootstrap-table/bootstrap-table.min.css">
 {% endblock %}
 {% block content %}
-{% if contatos %}
+{% if projetos %}
 <div class="box-typical box-typical-full-height" style="min-height: 444px;">
 	<section class="box-typical">
 		<div id="toolbar">
@@ -33,40 +33,29 @@
 			data-response-handler="responseHandler">
 				<thead>
 					<tr>
-						<th data-field="nome" data-sortable="true">Nome</th>
-						<th data-field="telefone" data-sortable="true">Telefone</th>
-						<th data-field="email" data-sortable="true">E-mail</th>
+						<th data-field="nome" data-sortable="true">Titulo</th>
+						<th data-field="telefone" data-sortable="true">Descrição</th>
 						<th data-field="data" data-sortable="true">Data</th>
+						<th data-field="data" data-sortable="true">Criado por</th>
 						<th data-field="" data-sortable="true">Opções</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for contato in contatos %}
-						{% if contato.is_visualizada %}
-							<tr>
-								<td>{{ contato.nome }}</td>
-								<td>{{ contato.telefone }}</td>
-								<td>{{ contato.email|default:'----' }}</td>
-								<td>{{ contato.data }}</td>
-								<td style="text-align: center; ">
-				                  <a href="{% url 'painel:contato-detalhes' contato.pk %}" class="like">
-				                    <i class="font-icon font-icon-eye"></i>
-				                  </a>				                  
-				                </td> 
-							</tr>
-						{% else %}
-							<tr>
-								<td><strong>{{ contato.nome }}</strong></td>
-								<td><strong>{{ contato.telefone }}</strong></td>
-								<td><strong>{{ contato.email|default:'----' }}</strong></td>
-								<td><strong>{{ contato.data }}</strong></td>
-								<td style="text-align: center; ">
-				                  <a href="{% url 'painel:contato-detalhes' contato.pk %}" class="like">
-				                    <i class="font-icon font-icon-eye"></i>
-				                  </a>				                  
-				                </td> 
-							</tr>
-						{% endif %}
+					{% for projeto in projetos %}
+						<tr>
+							<td>{{ projeto.titulo }}</td>
+							<td>{{ projeto.descricao|truncatechars:150 }}</td>
+							<td>{{ projeto.data }}</td>
+							<td>{{ projeto.usuario }}</td>
+							<td style="text-align: center;">
+			                  <a href="{% url 'painel:projeto-editar' projeto.pk %}" class="like">
+			                    <i class="font-icon font-icon-pencil"></i>
+			                  </a>
+			                  <a href="{% url 'painel:projeto-deletar' projeto.pk %}" class="like">
+			                    <i class="font-icon font-icon-trash"></i>
+			                  </a>				                  
+			                </td> 
+						</tr>
 					{% endfor %}
         		</tbody>
 			</table>
@@ -74,9 +63,9 @@
 	</section>
 	<nav aria-label="Page navigation example">
 	    <ul class="pagination">
-	      {% if contatos.has_previous %}
+	      {% if projetos.has_previous %}
 	        <li class="page-item">
-	          <a class="page-link" href="?page={{ contatos.previous_page_number }}" aria-label="Previous">
+	          <a class="page-link" href="?page={{ projetos.previous_page_number }}" aria-label="Previous">
 	            <span aria-hidden="true">&laquo;</span>
 	            <span class="sr-only">Previous</span>
 	          </a>
@@ -90,13 +79,13 @@
 	        </li>
 	      {% endif %}
 	      
-	      {% for page in contatos.paginator.page_range%}
-	        <li class="page-item {% if page == contatos.number %} active {% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+	      {% for page in projetos.paginator.page_range%}
+	        <li class="page-item {% if page == projetos.number %} active {% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
 	      {% endfor %}
 
-	      {% if contatos.has_next %}
+	      {% if projetos.has_next %}
 	        <li class="page-item">
-	          <a class="page-link" href="?page={{ contatos.next_page_number }}" aria-label="Next">
+	          <a class="page-link" href="?page={{ projetos.next_page_number }}" aria-label="Next">
 	            <span aria-hidden="true">&raquo;</span>
 	            <span class="sr-only">Next</span>
 	          </a>
@@ -119,11 +108,11 @@
 			<div class="add-model-screen-user">
 				<i class="font-icon font-icon-user"></i>
 			</div>
-			<h2>Aqui serão listadas suas mensagens</h2>
+			<h2>Aqui serão listados seus projetos</h2>
 			<p class="lead color-blue-grey-lighter">
-				Parece que você ainda não recebeu nenhuma
+				Parece que você ainda não tem nenhum
 				<br>
-				<b>Mensagem</b>.
+				<b>Projeto</b> cadastrada.
 			</p>
 			<!--<a href="" class="btn"></a>-->
 		</div>

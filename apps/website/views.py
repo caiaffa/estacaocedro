@@ -13,7 +13,7 @@ from apps.painel.models import Publicacao
 
 class Home(View):
     def get(self, request):
-    	publicacoes = Publicacao.objects.all().order_by('data')[:3]
+    	publicacoes = Publicacao.objects.all().order_by('-data')[:3]
     	context = {'publicacoes':publicacoes}
     	return render (request, 'index.html', context)
 

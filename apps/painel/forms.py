@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
-from .models import Publicacao
+from .models import Publicacao, Projeto
 
 class PublicacaoForm(forms.ModelForm):
 	class Meta:
@@ -23,6 +23,7 @@ class PublicacaoForm(forms.ModelForm):
 		self.fields['resumo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['conteudo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 
+
 class LoginForm(forms.Form):
 	usuario = forms.CharField(label='Usuário',required=True,max_length=50)
 	password = forms.CharField(label='Senha',required=True, widget=forms.PasswordInput)
@@ -33,3 +34,20 @@ class LoginForm(forms.Form):
 			user = authenticate(username=cleaned_data.get("usuario"), password=cleaned_data.get("password"))
 			if not user:
 				self.add_error('password', 'Usuário e/ou senha inválido(s)')
+
+
+class ProjetoForm(forms.ModelForm):
+	class Meta:
+		model = Projeto
+		fields = ['titulo', 'descricao']
+
+	def __init__(self, *args, **kwargs):
+		super(ProjetoForm, self).__init__(*args, **kwargs)
+		self.fields['titulo'].widget.attrs['class'] = 'form-control'
+		self.fields['descricao'].widget.attrs['class'] = 'form-control'
+
+		self.fields['titulo'].widget.attrs['placeholder'] = 'Título do projeto'
+		self.fields['descricao'].widget.attrs['placeholder'] = 'Descrição do projeto'
+
+		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['descricao'].widget.attrs['data-validation'] = '[NOTEMPTY]'
