@@ -1,11 +1,14 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 from apps.painel import views 
 
 urlpatterns = [
-	url(r'^$', views.Home.as_view(), name='home'),
-
+	url(r'^$', login_required(views.Home.as_view()), name='home'),
+    url(r'^login/$', views.Login.as_view(), name='login'),
+    url(r'^logout/$', views.Logout.as_view(), name='logout'),
+    
 	# URLS PUBLICAÇÃO
 	url(r'^publicacao/$', login_required(views.PublicacaoList.as_view()), name='publicacao-listar'),
     url(r'^publicacao/cadastrar/$', login_required(views.PublicacaoRegister.as_view()), name='publicacao-cadastrar'),

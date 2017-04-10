@@ -6,17 +6,41 @@ from django.template import RequestContext
 from django.http import (JsonResponse, HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseRedirect)
 from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import authenticate, login, logout
 import json
 
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
 from .models import Publicacao
-from .forms import PublicacaoForm
+from .forms import PublicacaoForm, LoginForm
 
 
 class Home(View):
     def get(self, request):
         return render (request, 'core/index.html')
+
+class Login(View):
+    def get(self, request):
+        form = LoginForm()
+        context = {'form':form}
+        return render (request, 'registration/login.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        context = {'form':form}
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data.get("usuario"), password=form.cleaned_data.get("password"))
+            login(request, user)
+            next = request.GET.get('next')
+            if next:
+                return redirect(next)
+        return render (request, 'registration/login.html', context)
+
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect(reverse_lazy("painel:login"))
+        
 
 
 class PublicacaoRegister(View):
@@ -25,7 +49,7 @@ class PublicacaoRegister(View):
         context = {'form':form}
         return render (request, 'publicacao/register.html', context)
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         form = PublicacaoForm(request.POST, request.FILES)
         context = {'form':form}
         if form.is_valid():
@@ -46,7 +70,7 @@ class PublicacaoEdit(View):
         context = {'form':form, 'publicacao':publicacao}
         return render (request, 'publicacao/edit.html', context)
 
-    def post(self, request, pk):
+    def post(self, request, pk, *args, **kwargs):
         publicacao = Publicacao.objects.get(pk=pk)
         form = PublicacaoForm(request.POST, request.FILES, instance=publicacao)
         context = {'form':form}
