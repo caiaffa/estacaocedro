@@ -9,12 +9,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 from .forms import ContatoForm
-from apps.painel.models import Publicacao
+from apps.painel.models import Publicacao, Projeto
 
 class Home(View):
     def get(self, request):
     	publicacoes = Publicacao.objects.all().order_by('-data')[:3]
-    	context = {'publicacoes':publicacoes}
+    	projetos = Projeto.objects.all().order_by('-data')[:6]
+    	context = {'publicacoes':publicacoes, 'projetos':projetos}
     	return render (request, 'index.html', context)
 
 class Noticias(View):
