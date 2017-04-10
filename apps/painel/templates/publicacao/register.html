@@ -42,14 +42,30 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<fieldset class="form-group">
-							<label for="{{form.imagem.id_for_label}}" class="col-sm2 form-label semibold">
-								{{ form.imagem.label_tag }}
+							<label for="{{form.resumo.id_for_label}}" class="col-sm2 form-label semibold">
+								{{ form.resumo.label_tag }}
 							</label>
 							<div class="col-sm10">
 								<p class="form-control-static">
-									{{ form.imagem }}
+									{{ form.resumo }}
 								</p>
-								<small class="text-muted">{{ form.imagem.errors }}</small>
+								<small class="text-muted">{{ form.resumo.errors }}</small>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<fieldset class="form-group">
+							<label for="{{form.titulo.id_for_label}}" class="col-sm2 form-label semibold">
+								{{ form.titulo.label_tag }}
+							</label>
+							<div class="col-sm10">
+								<p class="form-control-static">
+									{{ form.titulo }}
+								</p>
+								<small class="text-muted">{{ form.titulo.errors }}</small>
 							</div>
 						</fieldset>
 					</div>
