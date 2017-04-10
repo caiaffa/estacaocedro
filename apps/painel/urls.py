@@ -28,4 +28,5 @@ urlpatterns = [
 
     # URLS ALBUM
     url(r'^album/$', login_required(views.AlbumList.as_view()), name='album-listar'),
+    url(r'^album/cadastrar/$', login_required(views.AlbumRegister.as_view()), name='album-cadastrar'),
 ]
