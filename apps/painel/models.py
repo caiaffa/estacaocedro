@@ -28,6 +28,7 @@ class Projeto(models.Model):
 class Album(models.Model):
 	usuario = models.ForeignKey(User)
 	titulo = models.CharField('Título', max_length=50, unique=True)
+	categoria = models.CharField('Categoria', max_length=50, blank=True)
 	data_album = models.DateField('Data do Evento')
 	data = models.DateTimeField('Data de Criação', default=timezone.now)
 
