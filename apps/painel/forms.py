@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
-from .models import Publicacao, Projeto
+from .models import Publicacao, Projeto, Album
 
 class PublicacaoForm(forms.ModelForm):
 	class Meta:
@@ -51,3 +51,21 @@ class ProjetoForm(forms.ModelForm):
 
 		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['descricao'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+
+
+class AlbumForm(forms.ModelForm):
+	class Meta:
+		model = Album
+		fields = ['titulo', 'data_album',]
+
+	def __init__(self, *args, **kwargs):
+		super(AlbumForm, self).__init__(*args, **kwargs)
+		self.fields['titulo'].widget.attrs['class'] = 'form-control'
+		self.fields['data_album'].widget.attrs['class'] = 'form-control'
+
+		self.fields['titulo'].widget.attrs['placeholder'] = 'Título da publicação'
+		self.fields['data_album'].widget.attrs['placeholder'] = '__/__/____'
+
+		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['data_album'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		
