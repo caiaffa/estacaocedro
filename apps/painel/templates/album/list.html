@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/static/painel/build/css/separate/pages/gallery.min.css">
 {% endblock %}
 {% block content %}
-{% if not publicacoes %}
+{% if imagens %}
 <div class="tasks-grid">
 	<section class="box-typical box-typical-full-height-with-header">
 		<header class="box-typical-header box-typical-header-bordered">
@@ -360,11 +360,11 @@
 			<div class="add-model-screen-user">
 				<i class="font-icon font-icon-user"></i>
 			</div>
-			<h2>Aqui serão listadas suas publicações</h2>
+			<h2>Aqui serão listados seus Albuns</h2>
 			<p class="lead color-blue-grey-lighter">
 				Parece que você ainda não tem nenhuma
 				<br>
-				<b>Publicação</b> cadastrada.
+				<b>Album</b> cadastrado.
 			</p>
 			<!--<a href="" class="btn"></a>-->
 		</div>

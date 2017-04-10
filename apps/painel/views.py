@@ -187,6 +187,13 @@ class ProjetoDelete(View):
         projeto = Projeto.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:projeto-listar"))
 
+
+class AlbumRegister(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'album/register.html', )
+
+
 class AlbumList(View):
     def get(self, request):
         imagens = Imagem.objects.all()
