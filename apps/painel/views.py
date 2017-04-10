@@ -157,7 +157,7 @@ class ProjetoEdit(View):
 
     def post(self, request, pk):
         projeto = Projeto.objects.get(pk=pk)
-        form = PublicacaoForm(request.POST, request.FILES, instance=projeto)
+        form = ProjetoForm(request.POST, request.FILES, instance=projeto)
         context = {'form':form}
         if form.is_valid():
             obj = form.save(commit=False)
