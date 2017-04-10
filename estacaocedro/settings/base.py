@@ -151,3 +151,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+# Login
+LOGIN_URL = 'painel:login'

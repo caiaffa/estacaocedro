@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate
 from .models import Publicacao
 
 class PublicacaoForm(forms.ModelForm):
@@ -21,3 +22,14 @@ class PublicacaoForm(forms.ModelForm):
 		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['resumo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['conteudo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+
+class LoginForm(forms.Form):
+	usuario = forms.CharField(label='Usuário',required=True,max_length=50)
+	password = forms.CharField(label='Senha',required=True, widget=forms.PasswordInput)
+
+	def clean(self):
+		cleaned_data = super(LoginForm, self).clean()
+		if cleaned_data.get("usuario") and cleaned_data.get("password"):
+			user = authenticate(username=cleaned_data.get("usuario"), password=cleaned_data.get("password"))
+			if not user:
+				self.add_error('password', 'Usuário e/ou senha inválido(s)')
