@@ -194,6 +194,23 @@ class AlbumRegister(View):
         context = {'form':form}
         return render(request, 'album/register.html', context)
 
+    def post(self, request,*args, **kwargs):
+        form = AlbumForm(request.POST, request.FILES)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+
+            for value in request.FILES.getlist('imagem'):
+                img = Imagem()
+                img.album = obj
+                img.imagem = value
+                img.save()
+            return redirect(reverse_lazy("painel:album-listar"))
+        else:
+            return render (request, 'album/register.html', context)
+
 
 class AlbumList(View):
     def get(self, request):

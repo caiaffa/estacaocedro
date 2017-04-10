@@ -41,6 +41,22 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<fieldset class="form-group">
+							<label for="{{form.categoria.id_for_label}}" class="col-sm2 form-label semibold">
+								{{ form.categoria.label_tag }}
+							</label>
+							<div class="col-sm10">
+								<p class="form-control-static">
+									{{ form.categoria }}
+								</p>
+								<small class="text-muted">{{ form.categoria.errors }}</small>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<fieldset class="form-group">
 							<label for="{{form.data_album.id_for_label}}" class="col-sm2 form-label semibold">
 								{{ form.data_album.label_tag }}
 							</label>
@@ -54,25 +70,34 @@
 					</div>
 				</div>
 
-				
-
-				<div class="row">
-					<div class="col-lg-12">
+				<div class="row images">
+					<div class="col-lg-10">
 						<fieldset class="form-group">
-							<label for="{{form.imagem.id_for_label}}" class="col-sm2 form-label semibold">
-								{{ form.imagem.label_tag }}
+							<label class="col-sm2 form-label semibold" for="id_imagem">
+								<label for="id_imagem">Imagem:</label>
 							</label>
 							<div class="col-sm10">
 								<p class="form-control-static">
-									{{ form.imagem }}
+									<input type="file" required="" placeholder="Imagem de capa da publicação" data-validation="[NOTEMPTY]" name="imagem" id="id_imagem" class="form-control">
 								</p>
-								<small class="text-muted">{{ form.imagem.errors }}</small>
+								<small class="text-muted"></small>
+							</div>
+						</fieldset>
+					</div>
+					<div class="col-lg-2">
+						<fieldset class="form-group" style="padding:5px;">
+							<label class="col-sm2 form-label semibold" for="">
+								<label for="">&nbsp</label>
+							</label>
+							<div class="col-sm10">
+								<p class="form-control-static">
+									<button class="btn btn-save add-image" type="button">Adicionar Foto</button>
+								</p>
+								<small class="text-muted"></small>
 							</div>
 						</fieldset>
 					</div>
 				</div>
-
-				<h5 class="m-t-lg with-border">Conteúdo da página</h5>
 
 				
 
@@ -107,6 +132,24 @@
 	        }
 	    });
 
+	});
+	$(document).ready(function() {
+	    var max_fields      = 10; //maximum input boxes allowed
+	    var wrapper         = $(".images"); //Fields wrapper
+	    var add_button      = $(".add-image"); //Add button ID
+	   
+	    var x = 1; //initlal text box count
+	    $(add_button).click(function(e){ //on add input button click
+	        e.preventDefault();
+	        if(x < max_fields){ //max input box allowed
+	            x++; //text box increment
+	            $(wrapper).append('<div class="col-lg-12"><fieldset class="form-group"><div class="col-sm10"><p class="form-control-static"><input type="file" required="" placeholder="Imagem de capa da publicação" data-validation="[NOTEMPTY]" name="imagem" id="id_imagem" class="form-control"></p><small class="text-muted"></small><button class="btn btn-danger pull-right remove-image" type="button">Remover Foto</button></div></fieldset></div>'); //add input box
+	        }
+	    });
+	   
+	    $(wrapper).on("click",".remove-image", function(e){ //user click on remove text
+	        e.preventDefault(); $(this).parent('div').remove(); x--;
+	    })
 	});
 </script>
 {% endblock %}
