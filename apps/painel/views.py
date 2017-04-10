@@ -12,7 +12,7 @@ import json
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
 from .models import Publicacao, Projeto, Imagem, Album
-from .forms import PublicacaoForm, LoginForm, ProjetoForm
+from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm
 
 
 class Home(View):
@@ -190,8 +190,9 @@ class ProjetoDelete(View):
 
 class AlbumRegister(View):
     def get(self, request):
-        context = {}
-        return render(request, 'album/register.html', )
+        form = AlbumForm()
+        context = {'form':form}
+        return render(request, 'album/register.html', context)
 
 
 class AlbumList(View):
