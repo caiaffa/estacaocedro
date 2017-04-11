@@ -4,6 +4,9 @@
 django-debug-toolbar==1.6
 django-model-utils==2.6.1
 
+#tinymce
+django-tinymce
+
 #virtualenv
 virtualenv
 
