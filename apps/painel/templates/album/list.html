@@ -33,7 +33,15 @@
 				{% ifchanged imagem.album.titulo %} 
 					<div class="row">
 						<div class="col-lg-12">
-							<h5 class="m-t-lg with-border"> Album {{ imagem.album.titulo }}</h5>
+							<h5 class="m-t-lg with-border">
+							 Album {{ imagem.album.titulo }}
+			                 <a class="like pull-right" href="{% url 'painel:album-delete' imagem.album.pk %}">
+			                    <i class="font-icon font-icon-trash"></i>
+			                 </a>
+			                 <a class="like pull-right" style="margin-right:10px;" href="/painel/projeto/editar/2/">
+			                    <i class="font-icon font-icon-pencil"></i>
+			                 </a>
+							</h5>
 						</div>
 					</div>
 				{% endifchanged %}
@@ -45,12 +53,11 @@
 								<p class="gallery-item-title">{{ imagem.album.titulo }}</p>
 								<p>{{ imagem.album.categoria }}</p>
 								<div class="btn-group">
-									<button class="btn" type="button">
-										<i class="font-icon font-icon-cloud"></i>
-									</button>
-									<button class="btn" type="button">
-										<i class="font-icon font-icon-trash"></i>
-									</button>
+									<a href="{% url 'painel:foto-delete' imagem.pk %}" >
+										<button class="btn" type="button">
+											<i class="font-icon font-icon-trash"></i>
+										</button>
+									</a>
 								</div>
 								<p>3 days ago</p>
 							</div>
