@@ -30,6 +30,13 @@
 		<div class="box-typical-body">
 			<div class="gallery-grid">
 				{% for imagem in imagens %}
+				{% ifchanged imagem.album.titulo %} 
+					<div class="row">
+						<div class="col-lg-12">
+							<h5 class="m-t-lg with-border"> Album {{ imagem.album.titulo }}</h5>
+						</div>
+					</div>
+				{% endifchanged %}
 				<div class="gallery-col">
 					<article class="gallery-item" style="height: 158px;">
 						<img height="158" alt="" src="/media/{{ imagem.imagem }}" class="gallery-picture">

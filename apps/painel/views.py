@@ -7,12 +7,13 @@ from django.http import (JsonResponse, HttpResponse, HttpResponseForbidden, Http
 from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User as Usuario
 import json
 
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
 from .models import Publicacao, Projeto, Imagem, Album
-from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm
+from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm, UsuarioForm
 
 
 class Home(View):
@@ -40,6 +41,46 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return redirect(reverse_lazy("painel:login"))
+
+
+
+class UsuarioRegister(View):
+    def get(self, request):
+        if not request.user.is_staff:
+            return redirect(reverse_lazy("painel:home"))
+        form = UsuarioForm()
+        context = {'form':form}
+        return render (request, 'usuario/register.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = UsuarioForm(request.POST)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            return redirect(reverse_lazy("painel:usuario-listar"))
+        else:
+            return render (request, 'usuario/register.html', context)
+
+class UsuarioList(View):
+    def get(self, request):
+        obj_list = Usuario.objects.all().exclude(pk=request.user.pk).order_by('-date_joined')
+
+        paginator = Paginator(obj_list, 25)
+        page = request.GET.get('page')
+        try:
+            usuarios = paginator.page(page)
+        except PageNotAnInteger:
+            usuarios = paginator.page(1)
+        except EmptyPage:
+            usuarios = paginator.page(paginator.num_pages)
+        context = {'usuarios': usuarios}
+        return render(request, 'usuario/list.html', context)
+
+class UsuarioDelete(View):
+    def get(self, request, pk):
+        usuario = Usuario.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:usuario-listar"))
         
 
 
@@ -53,13 +94,7 @@ class PublicacaoRegister(View):
         form = PublicacaoForm(request.POST, request.FILES)
         context = {'form':form}
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.usuario = request.user
-            obj.save()
-            if request.POST.get('add_outro'):
-                return redirect(reverse_lazy("painel:publicacao-cadastrar"))
-            else:
-                return redirect(reverse_lazy("painel:publicacao-listar"))
+            return redirect(reverse_lazy("painel:publicacao-listar"))
         else:
             return render (request, 'publicacao/register.html', context)
 

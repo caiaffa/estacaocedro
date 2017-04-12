@@ -1,6 +1,35 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User as Usuario
+from django.contrib.auth.forms import UserCreationForm
 from .models import Publicacao, Projeto, Album
+
+class UsuarioForm(UserCreationForm):
+	class Meta:
+		model = Usuario
+		fields = ['username', 'email', 'first_name', 'last_name', 'is_staff']
+
+	def __init__(self, *args, **kwargs):
+		super(UsuarioForm, self).__init__(*args, **kwargs)
+		self.fields['username'].widget.attrs['class'] = 'form-control'
+		self.fields['email'].widget.attrs['class'] = 'form-control'
+		self.fields['first_name'].widget.attrs['class'] = 'form-control'
+		self.fields['last_name'].widget.attrs['class'] = 'form-control'
+		self.fields['is_staff'].widget.attrs['class'] = 'form-control'
+		self.fields['password1'].widget.attrs['class'] = 'form-control'
+		self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+		self.fields['username'].widget.attrs['placeholder'] = 'Nome de usuário'
+		self.fields['email'].widget.attrs['placeholder'] = 'Email'
+		self.fields['first_name'].widget.attrs['placeholder'] = 'Nome'
+		self.fields['last_name'].widget.attrs['placeholder'] = 'Sobrenome'
+		self.fields['password1'].widget.attrs['placeholder'] = 'Senha'
+		self.fields['password2'].widget.attrs['placeholder'] = 'Confirmação de senha'
+
+		self.fields['username'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['password1'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['password2'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+
 
 class PublicacaoForm(forms.ModelForm):
 	class Meta:
@@ -24,6 +53,7 @@ class PublicacaoForm(forms.ModelForm):
 		self.fields['conteudo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 
 
+
 class LoginForm(forms.Form):
 	usuario = forms.CharField(label='Usuário',required=True,max_length=50)
 	password = forms.CharField(label='Senha',required=True, widget=forms.PasswordInput)
@@ -34,6 +64,7 @@ class LoginForm(forms.Form):
 			user = authenticate(username=cleaned_data.get("usuario"), password=cleaned_data.get("password"))
 			if not user:
 				self.add_error('password', 'Usuário e/ou senha inválido(s)')
+
 
 
 class ProjetoForm(forms.ModelForm):
@@ -51,6 +82,7 @@ class ProjetoForm(forms.ModelForm):
 
 		self.fields['titulo'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['descricao'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+
 
 
 class AlbumForm(forms.ModelForm):

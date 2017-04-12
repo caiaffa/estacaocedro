@@ -8,7 +8,12 @@ urlpatterns = [
 	url(r'^$', login_required(views.Home.as_view()), name='home'),
     url(r'^login/$', views.Login.as_view(), name='login'),
     url(r'^logout/$', views.Logout.as_view(), name='logout'),
-    
+
+    # URLS USUARIO
+    url(r'^usuario/$', login_required(views.UsuarioList.as_view()), name='usuario-listar'),
+    url(r'^usuario/cadastrar/$', login_required(views.UsuarioRegister.as_view()), name='usuario-cadastrar'),
+    url(r'^usuario/deletar/(?P<pk>\d+)/$', views.UsuarioDelete.as_view(), name='usuario-deletar'),
+
 	# URLS PUBLICAÇÃO
 	url(r'^publicacao/$', login_required(views.PublicacaoList.as_view()), name='publicacao-listar'),
     url(r'^publicacao/cadastrar/$', login_required(views.PublicacaoRegister.as_view()), name='publicacao-cadastrar'),
