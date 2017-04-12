@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% block css %}
 <link rel="stylesheet" href="/static/painel/build/css/separate/pages/others.min.css">
-<link rel="stylesheet" href="/static/painel/build/css/lib/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet" href="/static/painel/build/css/separate/pages/tasks.min.css">
 {% endblock %}
 {% block content %}
-{% if contatos %}
+{% if usuarios %}
 <div class="box-typical box-typical-full-height" style="min-height: 444px;">
 	<section class="box-typical">
 		<div id="toolbar">
 			<div class="bootstrap-table-header">
-				Mensagens
+				Usuários
 			</div>
 		</div>
 		<div class="table-responsive">
@@ -33,40 +33,42 @@
 			data-response-handler="responseHandler">
 				<thead>
 					<tr>
+						<th data-field="username" data-sortable="true">Usuário</th>
+						<th data-field="email" data-sortable="true">Email</th>
 						<th data-field="nome" data-sortable="true">Nome</th>
-						<th data-field="telefone" data-sortable="true">Telefone</th>
-						<th data-field="email" data-sortable="true">E-mail</th>
-						<th data-field="data" data-sortable="true">Data</th>
-						<th data-field="" data-sortable="true">Opções</th>
+						<th data-field="data" data-sortable="true">Data de criação</th>
+						<th data-field="acesso" data-sortable="true">Ultimo acesso</th>
+						<th data-field="staff" data-sortable="true">Pode criar usuários</th>
+						<th data-field="opcoes" data-sortable="true">Opções</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for contato in contatos %}
-						{% if contato.is_visualizada %}
-							<tr>
-								<td>{{ contato.nome }}</td>
-								<td>{{ contato.telefone }}</td>
-								<td>{{ contato.email|default:'----' }}</td>
-								<td>{{ contato.data }}</td>
-								<td style="text-align: center; ">
-				                  <a href="{% url 'painel:contato-detalhes' contato.pk %}" class="like">
-				                    <i class="font-icon font-icon-eye"></i>
-				                  </a>				                  
-				                </td> 
-							</tr>
-						{% else %}
-							<tr>
-								<td><strong>{{ contato.nome }}</strong></td>
-								<td><strong>{{ contato.telefone }}</strong></td>
-								<td><strong>{{ contato.email|default:'----' }}</strong></td>
-								<td><strong>{{ contato.data }}</strong></td>
-								<td style="text-align: center; ">
-				                  <a href="{% url 'painel:contato-detalhes' contato.pk %}" class="like">
-				                    <i class="font-icon font-icon-eye"></i>
-				                  </a>				                  
-				                </td> 
-							</tr>
-						{% endif %}
+					{% for usuario in usuarios %}
+						<tr>
+							<td>{{ usuario.username }}</td>
+							<td>{{ usuario.email }}</td>
+							<td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
+							<td>{{ usuario.date_joined }}</td>
+							<td>
+								{% if usuario.last_login %}
+									{{ usuario.last_login }}
+								{% else %}
+									-------------
+								{% endif %}
+							</td>
+							<td>
+								{% if usuario.is_staff %}
+									<i class="font-icon font-icon-ok"></i>
+								{% else %}
+									<i class="font-icon font-icon-del"></i>
+								{% endif %}
+							</td>
+							<td style="text-align: center; ">
+			                  <a href="{% url 'painel:usuario-deletar' usuario.pk %}" class="like">
+			                    <i class="font-icon font-icon-trash"></i>
+			                  </a>				                  
+			                </td> 
+						</tr>
 					{% endfor %}
         		</tbody>
 			</table>
@@ -74,9 +76,9 @@
 	</section>
 	<nav aria-label="Page navigation example">
 	    <ul class="pagination">
-	      {% if contatos.has_previous %}
+	      {% if usuarios.has_previous %}
 	        <li class="page-item">
-	          <a class="page-link" href="?page={{ contatos.previous_page_number }}" aria-label="Previous">
+	          <a class="page-link" href="?page={{ usuarios.previous_page_number }}" aria-label="Previous">
 	            <span aria-hidden="true">&laquo;</span>
 	            <span class="sr-only">Anterior</span>
 	          </a>
@@ -90,13 +92,13 @@
 	        </li>
 	      {% endif %}
 	      
-	      {% for page in contatos.paginator.page_range%}
-	        <li class="page-item {% if page == contatos.number %} active {% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+	      {% for page in usuarios.paginator.page_range%}
+	        <li class="page-item {% if page == usuarios.number %} active {% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
 	      {% endfor %}
 
-	      {% if contatos.has_next %}
+	      {% if usuarios.has_next %}
 	        <li class="page-item">
-	          <a class="page-link" href="?page={{ contatos.next_page_number }}" aria-label="Next">
+	          <a class="page-link" href="?page={{ usuarios.next_page_number }}" aria-label="Next">
 	            <span aria-hidden="true">&raquo;</span>
 	            <span class="sr-only">Proximo</span>
 	          </a>
@@ -119,11 +121,11 @@
 			<div class="add-model-screen-user">
 				<i class="font-icon font-icon-user"></i>
 			</div>
-			<h2>Aqui serão listadas suas mensagens</h2>
+			<h2>Aqui serão listados seus usuários</h2>
 			<p class="lead color-blue-grey-lighter">
-				Parece que você ainda não recebeu nenhuma
+				Parece que você ainda não tem nenhum
 				<br>
-				<b>Mensagem</b>.
+				<b>Usuário</b> cadastrado.
 			</p>
 			<!--<a href="" class="btn"></a>-->
 		</div>

@@ -39,6 +39,9 @@
                                 <span class="lb">Gerência</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
+                                {% if request.user.is_staff %}
+                                    <a class="dropdown-item" href="{% url 'painel:usuario-listar' %}">Usuários</a>
+                                {% endif %}
                                 <a class="dropdown-item" href="{% url 'painel:contato-listar' %}">Mensagens</a>
                                 <a class="dropdown-item" href="{% url 'painel:projeto-listar' %}">Projetos</a>
                                 <a class="dropdown-item" href="{% url 'painel:publicacao-listar' %}">Publicações</a>
@@ -50,6 +53,9 @@
                                 Cadastrar
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dd-header-add">
+                                {% if request.user.is_staff %}
+                                    <a class="dropdown-item" href="{% url 'painel:usuario-cadastrar' %}">Usuários</a>
+                                {% endif %}
                             	<a class="dropdown-item" href="{% url 'painel:projeto-cadastrar' %}">Projetos</a>
                                 <a class="dropdown-item" href="{% url 'painel:publicacao-cadastrar' %}">Publicações</a>
                                 <a class="dropdown-item" href="{% url 'painel:album-cadastrar' %}">Album</a>
