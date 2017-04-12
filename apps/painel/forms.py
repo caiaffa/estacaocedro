@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User as Usuario
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .models import Publicacao, Projeto, Album
 
 class UsuarioForm(UserCreationForm):
@@ -64,6 +64,23 @@ class LoginForm(forms.Form):
 			user = authenticate(username=cleaned_data.get("usuario"), password=cleaned_data.get("password"))
 			if not user:
 				self.add_error('password', 'Usuário e/ou senha inválido(s)')
+
+
+
+class ChangePasswordForm(PasswordChangeForm):
+	def __init__(self, *args, **kwargs):
+		super(ChangePasswordForm, self).__init__(*args, **kwargs)
+		self.fields['old_password'].widget.attrs['class'] = 'form-control'
+		self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+		self.fields['new_password2'].widget.attrs['class'] = 'form-control'
+
+		self.fields['old_password'].widget.attrs['placeholder'] = 'Senha antiga'
+		self.fields['new_password1'].widget.attrs['placeholder'] = 'Nova senha'
+		self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirmação de senha'
+
+		self.fields['old_password'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['new_password1'].widget.attrs['data-validation'] = '[NOTEMPTY]'
+		self.fields['new_password2'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 
 
 
