@@ -8,17 +8,20 @@ from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as Usuario
+from django.contrib.auth import update_session_auth_hash
 import json
 
 from apps.website.models import Contato
 from apps.website.forms import ContatoForm
 from .models import Publicacao, Projeto, Imagem, Album
-from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm, UsuarioForm
+from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm, UsuarioForm, ChangePasswordForm
 
 
 class Home(View):
     def get(self, request):
         return render (request, 'core/index.html')
+
+
 
 class Login(View):
     def get(self, request):
@@ -81,7 +84,22 @@ class UsuarioDelete(View):
     def get(self, request, pk):
         usuario = Usuario.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:usuario-listar"))
-        
+
+class UsuarioChangePassword(View):
+    def get(self, request):
+        form = ChangePasswordForm(request.user)
+        context = {'form':form}
+        return render (request, 'usuario/changepassword.html', context)
+    def post(self, request, *args, **kwargs):
+        form = ChangePasswordForm(request.user, data=request.POST)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            update_session_auth_hash(request, form.user)
+            return redirect(reverse_lazy("painel:home"))
+        else:
+            return render (request, 'usuario/changepassword.html', context)        
 
 
 class PublicacaoRegister(View):
@@ -94,6 +112,9 @@ class PublicacaoRegister(View):
         form = PublicacaoForm(request.POST, request.FILES)
         context = {'form':form}
         if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
             return redirect(reverse_lazy("painel:publicacao-listar"))
         else:
             return render (request, 'publicacao/register.html', context)

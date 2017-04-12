@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^usuario/$', login_required(views.UsuarioList.as_view()), name='usuario-listar'),
     url(r'^usuario/cadastrar/$', login_required(views.UsuarioRegister.as_view()), name='usuario-cadastrar'),
     url(r'^usuario/deletar/(?P<pk>\d+)/$', views.UsuarioDelete.as_view(), name='usuario-deletar'),
+    url(r'^usuario/senha/$', views.UsuarioChangePassword.as_view(), name='usuario-senha'),
 
 	# URLS PUBLICAÇÃO
 	url(r'^publicacao/$', login_required(views.PublicacaoList.as_view()), name='publicacao-listar'),
