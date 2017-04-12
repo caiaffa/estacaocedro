@@ -236,7 +236,6 @@ class AlbumRegister(View):
             obj = form.save(commit=False)
             obj.usuario = request.user
             obj.save()
-
             for value in request.FILES.getlist('imagem'):
                 img = Imagem()
                 img.album = obj
@@ -252,3 +251,15 @@ class AlbumList(View):
         imagens = Imagem.objects.all()
         context = {'imagens': imagens}
         return render(request, 'album/list.html', context)
+
+
+class AlbumDelete(View):
+    def get(self, request, pk):
+        Album.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:album-listar"))
+
+
+class FotoDelete(View):
+    def get(self, request, pk):
+        Imagem.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:album-listar"))
