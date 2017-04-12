@@ -267,6 +267,31 @@ class AlbumRegister(View):
             return render (request, 'album/register.html', context)
 
 
+class AlbumEdit(View):
+    def get(self, request, pk):
+        album = Album.objects.get(pk=pk)
+        form = AlbumForm(instance=album)
+        context = {'form':form}
+        return render(request, 'album/edit.html', context)
+
+    def post(self, request, pk, *args, **kwargs):
+        album = Album.objects.get(pk=pk)
+        form = AlbumForm(request.POST, request.FILES, instance=album)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            for value in request.FILES.getlist('imagem'):
+                img = Imagem()
+                img.album = obj
+                img.imagem = value
+                img.save()
+            return redirect(reverse_lazy("painel:album-listar"))
+        else:
+            return render (request, 'album/edit.html', context)
+
+
 class AlbumList(View):
     def get(self, request):
         imagens = Imagem.objects.all()
