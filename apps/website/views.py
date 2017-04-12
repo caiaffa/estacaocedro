@@ -26,7 +26,12 @@ class Sobre(View):
 class Participe(View):
     def get(self, request):
     	context = {}
-    	return render (request, 'participe.html', context)   	
+    	return render (request, 'participe.html', context)   
+
+class Doar(View):
+    def get(self, request):
+    	context = {}
+    	return render (request, 'doar.html', context)   
 
 class Noticia(View):
 	def get(self, request, pk):

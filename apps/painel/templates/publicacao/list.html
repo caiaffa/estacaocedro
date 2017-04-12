@@ -12,7 +12,9 @@
 			<div class="sortable" data-sortable-id="2" aria-dropeffect="move">
 				<section class="box-typical task-card task" data-item-sortable-id="2" draggable="true" role="option" aria-grabbed="false">
 					<div class="task-card-photo">
-						<img height=150 src="/media/{{publicacao.imagem}}" alt="{{publicacao.titulo}}">
+						<a href="{% url 'website:noticia' publicacao.pk %}">
+							<img height=150 src="/media/{{publicacao.imagem}}" alt="{{publicacao.titulo}}">
+						</a>
 					</div>
 					<div class="task-card-in">
 						<div class="btn-group task-card-menu">
@@ -20,18 +22,18 @@
 								<i class="font-icon-dots-vert-square"></i>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/painel/publicacao/editar/{{publicacao.pk}}">
+								<a class="dropdown-item" href="{% url 'painel:publicacao-editar' publicacao.pk %}">
 									<i class="font-icon font-icon-pencil"></i>
 									Edit
 								</a>
-								<a class="dropdown-item" href="/painel/publicacao/deletar/{{publicacao.pk}}">
+								<a class="dropdown-item" href="{% url 'painel:publicacao-deletar' publicacao.pk %}">
 									<i class="font-icon font-icon-trash"></i>
 									Delete
 								</a>
 							</div>
 						</div>
 						<div class="task-card-title">
-							<a href="#">{{publicacao.titulo}}</a><br/>
+							<a href="{% url 'website:noticia' publicacao.pk %}">{{publicacao.titulo}}</a><br/>
 							<span class="task-card-title-label">(Publicada)</span>
 						</div>
 					</div>
