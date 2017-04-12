@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^sobre/$', views.Sobre.as_view(), name='sobre'),
     url(r'^participe/$', views.Participe.as_view(), name='participe'),
+    url(r'^doar/$', views.Doar.as_view(), name='doar'),
     url(r'^noticia/(?P<pk>\d+)/$', views.Noticia.as_view(), name='noticia'),
     url(r'^noticia/lista/$', views.ListaNoticias.as_view(), name='listanoticias'),
     url(r'^contato/$', views.Contato.as_view(), name='contato'),
