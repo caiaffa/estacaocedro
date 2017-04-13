@@ -14,7 +14,7 @@
 		<div class="desc animate-box">
 			<h2><strong>Ajude uma criança</strong> a  <strong>estudar</strong></h2>
 			<span><a href="{% url 'website:participe'%}" class="fh5co-site-name">Faça parte dessa mudança</a></span>
-			<span><a class="btn btn-primary btn-lg" href="#">Doe agora</a></span>
+			<span><a class="btn btn-primary btn-lg" href="{% url 'website:doar' %}">Doe agora</a></span>
 		</div>
 	</div>
 </div>
@@ -46,7 +46,7 @@
 					<div class="feature-copy">
 						<h3>Acompanhe nossos eventos</h3>
 						<p>Ajude-nos a crescer acompanhe nossos eventos  e ajude na divulgação.</p>
-						<p><a href="{% url 'website:listanoticias'%}">Leia Mais</a></p>
+						<p><a href="{% url 'website:noticia-lista'%}">Leia Mais</a></p>
 					</div>
 				</div>
 
@@ -67,68 +67,54 @@
 	</div>
 </div>
 
+{% if imagens %}
 <div id="fh5co-portfolio">
 	<div class="container">
-
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center heading-section animate-box">
 				<h3>Galeria de Fotos</h3>
 				<p>Acompanhe nosso trabalho, visite nossa galeria</p>
 			</div>
 		</div>
-
-		
 		<div class="row row-bottom-padded-md">
 			<div class="col-md-12">
 				<ul id="fh5co-portfolio-list">
-
-					<li class="two-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/static/site/images/foto_1.jpg); ">
-						<a href="#" class="color-3">
-							<div class="case-studies-summary">
-								<span>Artes</span>
-								<h2>Aulas artísticas</h2>
-							</div>
-						</a>
-					</li>
-				
-					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/static/site/images/foto_2.jpg); ">
-						<a href="#" class="color-4">
-							<div class="case-studies-summary">
-								<span>Teatro</span>
-								<h2>Teatro e fantasia</h2>
-							</div>
-						</a>
-					</li>
-
-					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/static/site/images/foto_3.jpg); "> 
-						<a href="#" class="color-5">
-							<div class="case-studies-summary">
-								<span>Escolas</span>
-								<h2>Entrega de material didatico</h2>
-							</div>
-						</a>
-					</li>
-					<li class="two-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/static/site/images/foto_4.jpg); ">
-						<a href="#" class="color-6">
-							<div class="case-studies-summary">
-								<span>Eventos</span>
-								<h2>Festas de caridade</h2>
-							</div>
-						</a>
-					</li>
+					{% for imagem in imagens %}
+						{% if forloop.counter < 5 %}
+							{% ifchanged imagem.album %}
+								{% if forloop.counter|divisibleby:2 %}
+									<li class="two-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
+										<a href="{% url 'website:galeria' imagem.album.pk %}" class="color-3">
+											<div class="case-studies-summary">
+												<span>{{imagem.album.categoria}}</span>
+												<h2>{{imagem.album.titulo}}</h2>
+											</div>
+										</a>
+									</li>
+								{% else %}
+									<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
+										<a href="{% url 'website:galeria' imagem.album.pk %}" class="color-3">
+											<div class="case-studies-summary">
+												<span>{{imagem.album.categoria}}</span>
+												<h2>{{imagem.album.titulo}}</h2>
+											</div>
+										</a>
+									</li>
+								{% endif %}
+							{% endifchanged %}
+						{% endif %}
+					{% endfor %}
 				</ul>		
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 text-center animate-box">
-				<a href="#" class="btn btn-primary btn-lg">Ver a galeria</a>
+				<a href="{% url 'website:galeria-lista' %}" class="btn btn-primary btn-lg">Ver galeria</a>
 			</div>
 		</div>
-
 	</div>
 </div>
-
+{% endif %}
 
 
 <div id="fh5co-content-section" class="fh5co-section-gray">
@@ -249,7 +235,7 @@
 
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 text-center animate-box">
-				<a href="{% url 'website:listanoticias' %}" class="btn btn-primary btn-lg">Ver Mais</a>
+				<a href="{% url 'website:noticia-lista' %}" class="btn btn-primary btn-lg">Ver Mais</a>
 			</div>
 		</div>
 

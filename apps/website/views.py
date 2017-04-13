@@ -9,14 +9,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
 from .forms import ContatoForm, DoacaoForm
-from apps.painel.models import Publicacao, Projeto
+from apps.painel.models import Publicacao, Projeto, Album, Imagem
 
 
 class Home(View):
     def get(self, request):
     	publicacoes = Publicacao.objects.all().order_by('-data')[:3]
     	projetos = Projeto.objects.all().order_by('-data')[:6]
-    	context = {'publicacoes':publicacoes, 'projetos':projetos}
+    	imagens = Imagem.objects.all()
+    	
+    	context = {'publicacoes':publicacoes, 'projetos':projetos, 'imagens':imagens}
     	return render (request, 'index.html', context)
 
 
@@ -34,20 +36,31 @@ class Participe(View):
     	return render (request, 'participe.html', context)   
 
 
+class Galeria(View):
+	def get(self, request, pk):
+		imagens = Imagem.objects.filter(album=pk)
+		context = {'imagens':imagens}
+		return render(request, 'galeria/galeria.html', context)
+
+class ListaGaleria(View):
+	def get(self, request):
+		imagens = Imagem.objects.all()
+		context = {'imagens':imagens}
+		return render(request, 'galeria/list.html', context)
+
+
 
 class Noticia(View):
 	def get(self, request, pk):
 		publicacao = Publicacao.objects.get(pk=pk)
 		context = {'publicacao':publicacao}
-		return render(request, 'noticia.html', context)
-
-
+		return render(request, 'noticia/noticia.html', context)
 
 class ListaNoticias(View):
 	def get(self, request):
 		publicacoes = Publicacao.objects.all()
 		context = {'publicacoes':publicacoes}
-		return render(request, 'listanoticias.html', context)
+		return render(request, 'noticia/list.html', context)
 
 
 
