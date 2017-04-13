@@ -19,10 +19,10 @@ class Contato(models.Model):
 class Doacao(models.Model):
 
     MODALIDADE_CHOICES = (
-        (1, 'Boleto bancário'),
-        (2, 'Pagamento em Espécie'),
-        (3, 'Depósito bancário'),
-        (4, 'Débito automático')
+        ('1', 'Boleto bancário'),
+        ('2', 'Pagamento em Espécie'),
+        ('3', 'Depósito bancário'),
+        ('4', 'Débito automático')
     )
 
     nome = models.CharField(max_length=100, verbose_name='Nome')
@@ -31,11 +31,11 @@ class Doacao(models.Model):
     email = models.EmailField(max_length=100, verbose_name='E-mail')
     telefone = models.CharField(max_length=20,  blank=True, null=True, verbose_name='Telefone Residencial')
     celular = models.CharField(max_length=20,  blank=True, null=True, verbose_name='Telefone Celular')
-    cep = models.CharField(max_length=10,  blank=True, null=True, verbose_name='CEP')
-    rua = models.CharField(max_length=255,  blank=True, null=True, verbose_name='Rua')
-    bairro = models.CharField(max_length=50,  blank=True, null=True, verbose_name='Bairro')
-    cidade = models.CharField(max_length=50,  blank=True, null=True, verbose_name='Cidade')
-    estado = models.CharField(max_length=2,  blank=True, null=True, verbose_name='UF')
+    cep = models.CharField(max_length=10, blank=True, null=True, verbose_name='CEP')
+    rua = models.CharField(max_length=255, verbose_name='Rua')
+    bairro = models.CharField(max_length=50,verbose_name='Bairro')
+    cidade = models.CharField(max_length=50, verbose_name='Cidade')
+    estado = models.CharField(max_length=2, verbose_name='UF')
     is_visualizada = models.BooleanField(default=False, verbose_name='Visualizada ?')
     data = models.DateTimeField(default=timezone.now, verbose_name='Data')
     valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor doado mensalmente')

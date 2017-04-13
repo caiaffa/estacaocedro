@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/painel/build/css/lib/bootstrap-table/bootstrap-table.min.css">
 {% endblock %}
 {% block content %}
-{% if contatos %}
+{% if doacoes %}
 <div class="box-typical box-typical-full-height" style="min-height: 444px;">
 	<section class="box-typical">
 		<div id="toolbar">
@@ -52,7 +52,7 @@
 								<td>{{ doacao.telefone|default:'----' }}</td>
 								<td>{{ doacao.celular|default:'----' }}</td>
 								<td>R$ {{ doacao.valor }}</td>
-								<td>{{ doacao.modalidade }}</td>
+								<td>{{ doacao.get_modalidade_display }}</td>
 								<td>{{ doacao.data }}</td>
 								<td style="text-align: center; ">
 				                  <a href="{% url 'painel:doacao-detalhes' doacao.pk %}" class="like">
@@ -67,7 +67,7 @@
 								<td><strong>{{ doacao.telefone|default:'----' }}</strong></td>
 								<td><strong>{{ doacao.celular|default:'----' }}</strong></td>
 								<td><strong>R$ {{ doacao.valor }}</strong></td>
-								<td><strong>{{ doacao.modalidade }}</strong></td>
+								<td><strong>{{ doacao.get_modalidade_display }}</strong></td>
 								<td><strong>{{ doacao.data }}</strong></td>
 								<td style="text-align: center; ">
 				                  <a href="{% url 'painel:doacao-detalhes' doacao.pk %}" class="like">

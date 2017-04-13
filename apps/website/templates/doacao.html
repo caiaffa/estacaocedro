@@ -190,6 +190,7 @@
 <script type="text/javascript">
 $('.info-modalidade').hide();
 $('.debito-automatico').hide();
+$('.debito-automatico input').attr('data-validation', '');
 $('.form-doacao').validate({
 	messages: {
         'NOTEMPTY': 'Por favor, preencha este campo.'
@@ -213,6 +214,8 @@ $(function(){
 	$('#{{form.modalidade.auto_id}}').change(function(event){
 		$('.info-modalidade').hide();
 		$('.debito-automatico').hide();
+		$('.debito-automatico input').attr('data-validation', '');
+
 		var modalidade = $('#{{form.modalidade.auto_id}}').val();
 		if(modalidade == '1'){
 			$('#boleto').show();
@@ -223,6 +226,7 @@ $(function(){
 		}else if(modalidade == '4'){
 			$('#debito').show();
 			$('.debito-automatico').show();
+			$('.debito-automatico input').attr('data-validation', '[NOTEMPTY]');
 		}
 	});
 });

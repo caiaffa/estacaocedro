@@ -79,6 +79,9 @@ class Doacao(View):
 		if form.is_valid():
 			obj = form.save(commit=False)
 			obj.save()
-		form = DoacaoForm()
-		context = {'form':form, 'message':True}
+			form = DoacaoForm()
+			context = {'form':form, 'message':True}
+		else:
+			context = {'form':form, 'message':False}
+			
 		return render (request, 'doacao.html', context)
