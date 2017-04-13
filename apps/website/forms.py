@@ -5,7 +5,7 @@ from .models import Contato, Doacao
 class ContatoForm(forms.ModelForm):
     class Meta:
         model = Contato
-        fields = "__all__"
+        fields = ['nome', 'email', 'telefone', 'descricao']
 
     def __init__(self, *args, **kwargs):
         super(ContatoForm, self).__init__(*args, **kwargs)
@@ -29,7 +29,9 @@ class DoacaoForm(forms.ModelForm):
 
     class Meta:
         model = Doacao
-        fields = "__all__"
+        fields = ['nome', 'rg', 'cpf', 'email', 'telefone', 'celular', 'cep', 'rua', 
+            'bairro', 'cidade', 'estado', 'valor', 'modalidade', 'banco', 'conta', 
+            'agencia', 'titular', 'cpf_cnpj']
 
     def __init__(self, *args, **kwargs):
         super(DoacaoForm, self).__init__(*args, **kwargs)
@@ -57,7 +59,6 @@ class DoacaoForm(forms.ModelForm):
         self.fields['celular'].widget.attrs['placeholder'] = 'Telefone Celular'
 
         self.fields['cep'].widget.attrs['class'] = 'form-control'
-        self.fields['cep'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['cep'].widget.attrs['placeholder'] = 'CEP'
         
         self.fields['rua'].widget.attrs['class'] = 'form-control'

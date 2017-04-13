@@ -30,130 +30,100 @@
               {{ form.rg }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="email">CPF</label>
               {{ form.cpf }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Telefone</label>
               {{ form.telefone }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Celular</label>
               {{ form.celular }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">CEP</label>
               {{ form.cep }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">UF</label>
               {{ form.estado }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-12">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Rua</label>
               {{ form.rua }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Bairro</label>
               {{ form.bairro }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Cidade</label>
               {{ form.cidade }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Valor</label>
+              <label class="form-label semibold" for="descricao">Valor (R$)</label>
               {{ form.valor }}
             </fieldset>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="descricao">Modalidade</label>
               {{ form.modalidade }}
             </fieldset>
           </div>
-        </div>
-        {% if is_visualizada %}
-        <h5 class="m-t-lg with-border">Informações de debito automático</h5>
-        <div class="row">
+          {% if form.modalidade.value == '4' %}
+          <h5 class="m-t-lg with-border">Informações de debito automático</h5>
           <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Banco</label>
-              {{ form.banco }}
-            </fieldset>
-          </div>
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Banco</label>
+                {{ form.banco }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Conta</label>
+                {{ form.conta }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Agência</label>
+                {{ form.agencia }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Titular</label>
+                {{ form.titular }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">CPF/CNPJ</label>
+                {{ form.cpf_cnpj }}
+              </fieldset>
+            </div>
+          {% endif %}
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Conta</label>
-              {{ form.conta }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Agência</label>
-              {{ form.agencia }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Titular</label>
-              {{ form.titular }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">CPF/CNPJ</label>
-              {{ form.cpf_cnpj }}
-            </fieldset>
-          </div>
-        </div>
-        {% endif %}
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">

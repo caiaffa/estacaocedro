@@ -222,13 +222,13 @@ class DoacaoDetail(View):
         form.fields['estado'].widget.attrs['disabled'] = True
         form.fields['valor'].widget.attrs['disabled'] = True
         form.fields['modalidade'].widget.attrs['disabled'] = True
-        form.fields['data'].widget.attrs['disabled'] = True
+        form.fields['banco'].widget.attrs['disabled'] = True
         form.fields['conta'].widget.attrs['disabled'] = True
         form.fields['agencia'].widget.attrs['disabled'] = True
         form.fields['titular'].widget.attrs['disabled'] = True
         form.fields['cpf_cnpj'].widget.attrs['disabled'] = True
 
-        context = {'form':form, 'doacao':pk, 'is_visualizada':doacao.is_visualizada}
+        context = {'form':form, 'doacao':pk}
         return render (request, 'doacao/detail.html', context)
 
 class DoacaoDelete(View):
