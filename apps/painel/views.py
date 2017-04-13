@@ -38,6 +38,8 @@ class Login(View):
             next = request.GET.get('next')
             if next:
                 return redirect(next)
+            else:
+                return reverse_lazy("painel:home")
         return render (request, 'registration/login.html', context)
 
 class Logout(View):
