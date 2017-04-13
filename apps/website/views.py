@@ -8,8 +8,9 @@ from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
-from .forms import ContatoForm
+from .forms import ContatoForm, DoacaoForm
 from apps.painel.models import Publicacao, Projeto
+
 
 class Home(View):
     def get(self, request):
@@ -18,20 +19,21 @@ class Home(View):
     	context = {'publicacoes':publicacoes, 'projetos':projetos}
     	return render (request, 'index.html', context)
 
+
+
 class Sobre(View):
     def get(self, request):
     	context = {}
     	return render (request, 'sobre.html', context) 
+
+
 
 class Participe(View):
     def get(self, request):
     	context = {}
     	return render (request, 'participe.html', context)   
 
-class Doar(View):
-    def get(self, request):
-    	context = {}
-    	return render (request, 'doar.html', context)   
+
 
 class Noticia(View):
 	def get(self, request, pk):
@@ -39,11 +41,15 @@ class Noticia(View):
 		context = {'publicacao':publicacao}
 		return render(request, 'noticia.html', context)
 
+
+
 class ListaNoticias(View):
 	def get(self, request):
 		publicacoes = Publicacao.objects.all()
 		context = {'publicacoes':publicacoes}
 		return render(request, 'listanoticias.html', context)
+
+
 
 class Contato(View):
 	def get(self, request):
@@ -59,3 +65,20 @@ class Contato(View):
 		form = ContatoForm()
 		context = {'form':form, 'message':True}
 		return render (request, 'contato.html', context)
+
+
+
+class Doacao(View):
+	def get(self, request):
+		form = DoacaoForm
+		context = {'form':form, 'message':False}
+		return render (request, 'doacao.html', context)
+
+	def post(self, request, *args, **kwargs):
+		form = DoacaoForm(request.POST)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.save()
+		form = DoacaoForm()
+		context = {'form':form, 'message':True}
+		return render (request, 'doacao.html', context)
