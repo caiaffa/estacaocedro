@@ -26,6 +26,11 @@ urlpatterns = [
     url(r'^mensagem/visualizar/(?P<pk>\d+)/$', login_required(views.ContatoDetail.as_view()), name='contato-detalhes'),
     url(r'^mensagem/deletar/(?P<pk>\d+)/$', login_required(views.ContatoDelete.as_view()), name='contato-deletar'),
 
+    # URLS DOACAO
+    url(r'^doacoes/$', views.DoacaoList.as_view(), name='doacao-listar'),
+    url(r'^doacoes/visualizar/(?P<pk>\d+)/$', login_required(views.DoacaoDetail.as_view()), name='doacao-detalhes'),
+    url(r'^doacoes/deletar/(?P<pk>\d+)/$', login_required(views.DoacaoDelete.as_view()), name='doacao-deletar'),
+
     # URLS PROJETO
     url(r'^projeto/$', login_required(views.ProjetoList.as_view()), name='projeto-listar'),
     url(r'^projeto/cadastrar/$', login_required(views.ProjetoRegister.as_view()), name='projeto-cadastrar'),

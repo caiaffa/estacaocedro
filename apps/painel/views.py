@@ -11,8 +11,8 @@ from django.contrib.auth.models import User as Usuario
 from django.contrib.auth import update_session_auth_hash
 import json
 
-from apps.website.models import Contato
-from apps.website.forms import ContatoForm
+from apps.website.models import Contato, Doacao
+from apps.website.forms import ContatoForm, DoacaoForm
 from .models import Publicacao, Projeto, Imagem, Album
 from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm, UsuarioForm, ChangePasswordForm
 
@@ -184,6 +184,57 @@ class ContatoDelete(View):
     def get(self, request, pk):
         contato = Contato.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:contato-listar"))
+
+
+
+class DoacaoList(View):
+    def get(self, request):
+        obj_list = Doacao.objects.all().order_by('data')
+
+        paginator = Paginator(obj_list, 25)
+        page = request.GET.get('page')
+        try:
+            doacoes = paginator.page(page)
+        except PageNotAnInteger:
+            doacoes = paginator.page(1)
+        except EmptyPage:
+            doacoes = paginator.page(paginator.num_pages)
+        context = {'doacoes': doacoes}
+        return render(request, 'doacao/list.html', context)
+
+class DoacaoDetail(View):
+    def get(self, request, pk):
+        doacao = Doacao.objects.get(pk=pk)
+        doacao.is_visualizada = True
+        doacao.save()
+        form = DoacaoForm(instance=doacao)
+        form.fields['nome'].widget.attrs['disabled'] = True
+        form.fields['rg'].widget.attrs['disabled'] = True
+        form.fields['cpf'].widget.attrs['disabled'] = True
+        form.fields['email'].widget.attrs['disabled'] = True
+        form.fields['nome'].widget.attrs['disabled'] = True
+        form.fields['telefone'].widget.attrs['disabled'] = True
+        form.fields['celular'].widget.attrs['disabled'] = True
+        form.fields['cep'].widget.attrs['disabled'] = True
+        form.fields['rua'].widget.attrs['disabled'] = True
+        form.fields['bairro'].widget.attrs['disabled'] = True
+        form.fields['cidade'].widget.attrs['disabled'] = True
+        form.fields['estado'].widget.attrs['disabled'] = True
+        form.fields['valor'].widget.attrs['disabled'] = True
+        form.fields['modalidade'].widget.attrs['disabled'] = True
+        form.fields['data'].widget.attrs['disabled'] = True
+        form.fields['conta'].widget.attrs['disabled'] = True
+        form.fields['agencia'].widget.attrs['disabled'] = True
+        form.fields['titular'].widget.attrs['disabled'] = True
+        form.fields['cpf_cnpj'].widget.attrs['disabled'] = True
+
+        context = {'form':form, 'doacao':pk, 'is_visualizada':doacao.is_visualizada}
+        return render (request, 'doacao/detail.html', context)
+
+class DoacaoDelete(View):
+    def get(self, request, pk):
+        doacao = Doacao.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:doacao-listar"))
     
 
 
