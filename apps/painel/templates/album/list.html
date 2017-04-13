@@ -38,7 +38,7 @@
 			                 <a class="like pull-right" href="{% url 'painel:album-delete' imagem.album.pk %}">
 			                    <i class="font-icon font-icon-trash"></i>
 			                 </a>
-			                 <a class="like pull-right" style="margin-right:10px;" href="/painel/projeto/editar/2/">
+			                 <a class="like pull-right" style="margin-right:10px;" href="{% url 'painel:album-editar' imagem.album.pk %}">
 			                    <i class="font-icon font-icon-pencil"></i>
 			                 </a>
 							</h5>
