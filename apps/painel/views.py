@@ -222,6 +222,7 @@ class DoacaoDetail(View):
         form.fields['estado'].widget.attrs['disabled'] = True
         form.fields['valor'].widget.attrs['disabled'] = True
         form.fields['modalidade'].widget.attrs['disabled'] = True
+        form.fields['banco'].widget.attrs['disabled'] = True
         form.fields['conta'].widget.attrs['disabled'] = True
         form.fields['agencia'].widget.attrs['disabled'] = True
         form.fields['titular'].widget.attrs['disabled'] = True

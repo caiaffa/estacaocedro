@@ -90,50 +90,40 @@
               {{ form.modalidade }}
             </fieldset>
           </div>
-        </div>
-        {% if modalidade.value == '3' %}
-        <h5 class="m-t-lg with-border">Informações de debito automático</h5>
-        <div class="row">
+          {% if form.modalidade.value == '4' %}
+          <h5 class="m-t-lg with-border">Informações de debito automático</h5>
           <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Banco</label>
-              {{ form.banco }}
-            </fieldset>
-          </div>
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Banco</label>
+                {{ form.banco }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Conta</label>
+                {{ form.conta }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Agência</label>
+                {{ form.agencia }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">Titular</label>
+                {{ form.titular }}
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="descricao">CPF/CNPJ</label>
+                {{ form.cpf_cnpj }}
+              </fieldset>
+            </div>
+          {% endif %}
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Conta</label>
-              {{ form.conta }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Agência</label>
-              {{ form.agencia }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">Titular</label>
-              {{ form.titular }}
-            </fieldset>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset class="form-group">
-              <label class="form-label semibold" for="descricao">CPF/CNPJ</label>
-              {{ form.cpf_cnpj }}
-            </fieldset>
-          </div>
-        </div>
-        {% endif %}
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
