@@ -191,7 +191,7 @@ class ContatoDelete(View):
 
 class DoacaoList(View):
     def get(self, request):
-        obj_list = Doacao.objects.all().order_by('data')
+        obj_list = Doacao.objects.all().order_by('-data')
 
         paginator = Paginator(obj_list, 25)
         page = request.GET.get('page')
