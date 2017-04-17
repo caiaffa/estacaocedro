@@ -110,7 +110,7 @@ class AlbumForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(AlbumForm, self).__init__(*args, **kwargs)
 		self.fields['titulo'].widget.attrs['class'] = 'form-control'
-		self.fields['data_album'].widget.attrs['class'] = 'form-control'
+		self.fields['data_album'].widget.attrs['class'] = 'form-control data'
 		self.fields['categoria'].widget.attrs['class'] = 'form-control'
 
 		self.fields['titulo'].widget.attrs['placeholder'] = 'Título da publicação'
