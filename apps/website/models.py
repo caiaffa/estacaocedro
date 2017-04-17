@@ -30,7 +30,7 @@ class Doacao(models.Model):
     cpf = models.CharField(max_length=14, verbose_name='CPF')
     email = models.EmailField(max_length=100, verbose_name='E-mail')
     telefone = models.CharField(max_length=20,  blank=True, null=True, verbose_name='Telefone Residencial')
-    celular = models.CharField(max_length=20,  blank=True, null=True, verbose_name='Telefone Celular')
+    celular = models.CharField(max_length=21,  blank=True, null=True, verbose_name='Telefone Celular')
     cep = models.CharField(max_length=10, blank=True, null=True, verbose_name='CEP')
     rua = models.CharField(max_length=255, verbose_name='Rua')
     bairro = models.CharField(max_length=50,verbose_name='Bairro')
@@ -38,7 +38,7 @@ class Doacao(models.Model):
     estado = models.CharField(max_length=2, verbose_name='UF')
     is_visualizada = models.BooleanField(default=False, verbose_name='Visualizada ?')
     data = models.DateTimeField(default=timezone.now, verbose_name='Data')
-    valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor doado mensalmente')
+    valor = models.CharField(max_length=255, verbose_name='Valor doado mensalmente')
     modalidade = models.CharField(max_length=20,  verbose_name='Modalidade de Pagamento', choices=MODALIDADE_CHOICES)
 
     # CAMPOS OPCIONAIS
