@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as Usuario
 from django.contrib.auth import update_session_auth_hash
+from django.utils import timezone
 import json
 
 from apps.website.models import Contato, Doacao
@@ -346,7 +347,8 @@ class AlbumEdit(View):
 class AlbumList(View):
     def get(self, request):
         imagens = Imagem.objects.all()
-        context = {'imagens': imagens}
+        hoje = timezone.now
+        context = {'imagens': imagens, 'hoje':hoje}
         return render(request, 'album/list.html', context)
 
 

@@ -44,7 +44,7 @@ class DoacaoForm(forms.ModelForm):
         self.fields['rg'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['rg'].widget.attrs['placeholder'] = 'RG'
 
-        self.fields['cpf'].widget.attrs['class'] = 'form-control'
+        self.fields['cpf'].widget.attrs['class'] = 'form-control cpf'
         self.fields['cpf'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['cpf'].widget.attrs['placeholder'] = 'CPF'
 
@@ -52,18 +52,18 @@ class DoacaoForm(forms.ModelForm):
         self.fields['email'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
 
-        self.fields['telefone'].widget.attrs['class'] = 'form-control'
-        self.fields['telefone'].widget.attrs['placeholder'] = 'Telefone Residencial'
+        self.fields['telefone'].widget.attrs['class'] = 'form-control telefone'
+        self.fields['telefone'].widget.attrs['placeholder'] = 'Telefone Fixo'
 
-        self.fields['celular'].widget.attrs['class'] = 'form-control'
+        self.fields['celular'].widget.attrs['class'] = 'form-control celular'
         self.fields['celular'].widget.attrs['placeholder'] = 'Telefone Celular'
 
-        self.fields['cep'].widget.attrs['class'] = 'form-control'
+        self.fields['cep'].widget.attrs['class'] = 'form-control cep'
         self.fields['cep'].widget.attrs['placeholder'] = 'CEP'
         
         self.fields['rua'].widget.attrs['class'] = 'form-control'
         self.fields['rua'].widget.attrs['data-validation'] = '[NOTEMPTY]'
-        self.fields['rua'].widget.attrs['placeholder'] = 'Rua'
+        self.fields['rua'].widget.attrs['placeholder'] = 'Endereço'
 
         self.fields['bairro'].widget.attrs['class'] = 'form-control'
         self.fields['bairro'].widget.attrs['data-validation'] = '[NOTEMPTY]'
@@ -77,7 +77,7 @@ class DoacaoForm(forms.ModelForm):
         self.fields['estado'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['estado'].widget.attrs['placeholder'] = 'UF'
 
-        self.fields['valor'].widget.attrs['class'] = 'form-control'
+        self.fields['valor'].widget.attrs['class'] = 'form-control dinheiro'
         self.fields['valor'].widget.attrs['data-validation'] = '[NOTEMPTY]'
         self.fields['valor'].widget.attrs['placeholder'] = 'Valor (R$)'
 
