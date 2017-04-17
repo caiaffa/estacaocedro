@@ -67,7 +67,7 @@
 	</div>
 </div>
 
-{% if imagens %}
+{% if galeria %}
 <div id="fh5co-portfolio">
 	<div class="container">
 		<div class="row">
@@ -79,30 +79,21 @@
 		<div class="row row-bottom-padded-md">
 			<div class="col-md-12">
 				<ul id="fh5co-portfolio-list">
-					{% for imagem in imagens %}
-						{% if forloop.counter < 5 %}
-							{% ifchanged imagem.album %}
-								{% if forloop.counter|divisibleby:2 %}
-									<li class="two-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
-										<a href="{% url 'website:galeria' imagem.album.pk %}" class="color-3">
-											<div class="case-studies-summary">
-												<span>{{imagem.album.categoria}}</span>
-												<h2>{{imagem.album.titulo}}</h2>
-											</div>
-										</a>
-									</li>
-								{% else %}
-									<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
-										<a href="{% url 'website:galeria' imagem.album.pk %}" class="color-3">
-											<div class="case-studies-summary">
-												<span>{{imagem.album.categoria}}</span>
-												<h2>{{imagem.album.titulo}}</h2>
-											</div>
-										</a>
-									</li>
-								{% endif %}
-							{% endifchanged %}
-						{% endif %}
+					{% for imagem in galeria %}	
+						{% ifchanged imagem.album %}	
+							{% if forloop.counter == 1 or forloop.counter == 4 %}
+							<li class="two-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
+							{% else %}
+							<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/media/{{imagem.imagem}}); ">
+							{% endif %}
+								<a href="{% url 'website:galeria' imagem.album.pk %}" class="color-3">
+									<div class="case-studies-summary">
+										<span>{{imagem.album.categoria}}</span>
+										<h2>{{imagem.album.titulo}}</h2>
+									</div>
+								</a>
+							</li>
+						{% endifchanged %}
 					{% endfor %}
 				</ul>		
 			</div>
