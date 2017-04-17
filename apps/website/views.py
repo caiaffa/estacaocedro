@@ -16,9 +16,20 @@ class Home(View):
     def get(self, request):
     	publicacoes = Publicacao.objects.all().order_by('-data')[:3]
     	projetos = Projeto.objects.all().order_by('-data')[:6]
-    	imagens = Imagem.objects.all()
-    	
-    	context = {'publicacoes':publicacoes, 'projetos':projetos, 'imagens':imagens}
+    	albuns = Album.objects.all().order_by('-data')[:4]
+    	imagens = Imagem.objects.all().order_by('-album__data')
+
+    	galeria = []
+    	for album in albuns:
+    		for imagem in imagens:
+    			if album.pk == imagem.album.pk:
+    				galeria.append(imagem)
+    				break
+    			pass
+    		pass
+    	pass
+
+    	context = {'publicacoes':publicacoes, 'projetos':projetos, 'galeria':galeria}
     	return render (request, 'index.html', context)
 
 
@@ -44,8 +55,19 @@ class Galeria(View):
 
 class ListaGaleria(View):
 	def get(self, request):
-		imagens = Imagem.objects.all()
-		context = {'imagens':imagens}
+		albuns = Album.objects.all().order_by('-data')[:4]
+		imagens = Imagem.objects.all().order_by('-album__data')
+
+		galeria = []
+		for album in albuns:
+			for imagem in imagens:
+				if album.pk == imagem.album.pk:
+					galeria.append(imagem)
+					break
+				pass
+			pass
+			
+		context = {'galeria':galeria}
 		return render(request, 'galeria/list.html', context)
 
 
