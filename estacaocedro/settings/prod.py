@@ -48,28 +48,33 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'formatter': 'generic',
             'filename': BASE_DIR + '/log/template.log',
-        }
+        },
+        'gunicorn_file': {
+            'class': 'logging.Handlers.RotatingFileHandler',
+            'formatter': 'generic',
+            'filename': BASE_DIR + '/log/gunicorn.log',
+        },
     },
     'loggers': {
-        'django.db.backends': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
         'django.server':{
-            'handlers': ['console', 'server_file'],
+            'handlers': ['server_file'],
             'level': 'ERROR',
             'propagate': False,
         },
         'django.request':{
-            'handlers': ['console', 'request_file'],
+            'handlers': ['request_file'],
             'level': 'ERROR',
             'propagate': False,
         },
         'django.template':{
-            'handlers': ['console', 'template_file'],
+            'handlers': ['template_file'],
             'level': 'ERROR',
             'propagate': False,
+        },
+        'gunicorn.errors':{
+            'handlers': ['gunicorn_file'],
+            'level': 'ERROR',
+            'propagate': True,
         }
     },
 }
