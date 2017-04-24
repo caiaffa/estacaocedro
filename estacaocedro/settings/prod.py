@@ -18,6 +18,16 @@ ALLOWED_HOSTS = ('*')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'generic': {
+            'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+            '()': 'logging.Formatter',
+        },
+    },
     'handlers': {
         'console': {
             'level': 'DEBUG',
