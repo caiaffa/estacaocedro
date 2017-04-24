@@ -20,7 +20,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(message)s'
         },
         'generic': {
             'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
@@ -34,32 +34,42 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-        'error_file': {
+        'server_file': {
             'class': 'logging.FileHandler',
             'formatter': 'generic',
-            'filename': BASE_DIR + '/log/gunicorn.error.log',
+            'filename': BASE_DIR + '/log/server.log',
         },
-        'access_file': {
+        'request_file': {
             'class': 'logging.FileHandler',
             'formatter': 'generic',
-            'filename': BASE_DIR + '/log/gunicorn.access.log',
+            'filename': BASE_DIR + '/log/request.log',
+        },
+        'template_file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'generic',
+            'filename': BASE_DIR + '/log/template.log',
         },
     },
     'loggers': {
         'django.db.backends': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },
-        'gunicorn.error': {
-            'level': 'INFO',
-            'handlers': ['error_file'],
-            'propagate': True,
-        },
-        'gunicorn.access': {
-            'level': 'INFO',
-            'handlers': ['access_file'],
+        'django.server':{
+            'handlers': ['console', 'server_file'],
+            'level': 'ERROR',
             'propagate': False,
         },
+        'django.request':{
+            'handlers': ['console', 'request_file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.template':{
+            'handlers': ['console', 'template_file'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
     },
 }
