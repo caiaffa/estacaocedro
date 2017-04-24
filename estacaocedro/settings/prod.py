@@ -37,12 +37,12 @@ LOGGING = {
         'error_file': {
             'class': 'logging.FileHandler',
             'formatter': 'generic',
-            'filename': '/home/i3lsite/websites/estacaocedro/gunicorn.error.log',
+            'filename': '/home/i3lsite/websites/estacaocedro/log/gunicorn.error.log',
         },
         'access_file': {
             'class': 'logging.FileHandler',
             'formatter': 'generic',
-            'filename': '/home/i3lsite/websites/estacaocedro/gunicorn.access.log',
+            'filename': '/home/i3lsite/websites/estacaocedro/log/gunicorn.access.log',
         },
     },
     'loggers': {
