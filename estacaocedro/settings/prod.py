@@ -49,6 +49,11 @@ LOGGING = {
             'formatter': 'generic',
             'filename': BASE_DIR + '/log/template.log',
         },
+        'gunicorn_file': {
+            'class': 'logging.Handlers.RotatingFileHandler',
+            'formatter': 'generic',
+            'filename': BASE_DIR + '/log/gunicorn.log',
+        },
     },
     'loggers': {
         'django.db.backends': {
@@ -70,6 +75,11 @@ LOGGING = {
             'handlers': ['console', 'template_file'],
             'level': 'ERROR',
             'propagate': False,
+        }
+        'gunicorn.errors':{
+            'handlers': ['console', 'gunicorn_file'],
+            'level': 'DEBUG',
+            'propagate': True,
         }
     },
 }
