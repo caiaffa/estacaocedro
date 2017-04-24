@@ -50,7 +50,7 @@ LOGGING = {
             'filename': BASE_DIR + '/log/template.log',
         },
         'gunicorn_file': {
-            'class': 'logging.Handlers.RotatingFileHandler',
+            'class': 'logging.FileHandler',
             'formatter': 'generic',
             'filename': BASE_DIR + '/log/gunicorn.log',
         },
