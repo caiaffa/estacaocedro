@@ -20,14 +20,14 @@
 		<div class="container">
 			<div class="row row-bottom-padded-md">
 				{% for publicacao in publicacoes %}
-					<div class="col-lg-4 col-md-4 col-sm-6">
+					<div class="col-lg-4 col-md-4 col-sm-6" itemscope itemtype = "http://www.estacaocedro.com.br/noticia/lista/">
 						<div class="fh5co-blog animate-box">
 							<a href="{% url 'website:noticia' publicacao.pk %}">
 								<img class="img-responsive img-custom" src="/media/{{publicacao.imagem}}" alt="{{publicacao.titulo}}">
 							</a>
 							<div class="blog-text">
 								<div class="prod-title">
-									<h3>
+									<h3 itemprop="name">
 										<a href="{% url 'website:noticia' publicacao.pk %}">
 											{{publicacao.titulo}}
 										</a>
@@ -36,7 +36,7 @@
 									<p class="publicacao-resumo" title="{{publicacao.resumo}}">
 										{{publicacao.resumo|truncatechars:100}}
 									</p>
-									<p><a href="{% url 'website:noticia' publicacao.pk %}">Leia mais...</a></p>
+									<p><a itemprop="url" href="{% url 'website:noticia' publicacao.pk %}">Leia mais...</a></p>
 								</div>
 							</div> 
 						</div>
