@@ -1,6 +1,8 @@
 from .base import *
 import os
 
+DOMAIN = 'estacaocedro.com.br'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
