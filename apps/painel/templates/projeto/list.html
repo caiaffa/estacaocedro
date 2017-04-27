@@ -36,14 +36,14 @@
 						<th data-field="nome" data-sortable="true">Titulo</th>
 						<th data-field="telefone" data-sortable="true">Descrição</th>
 						<th data-field="data" data-sortable="true">Data</th>
-						<th data-field="data" data-sortable="true">Criado por</th>
+						<th data-field="criado por" data-sortable="true">Criado por</th>
 						<th data-field="" data-sortable="true">Opções</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for projeto in projetos %}
 						<tr>
-							<td>{{ projeto.titulo }}</td>
+							<td>{{ projeto.titulo }} </td>
 							<td>{{ projeto.descricao|truncatechars:150 }}</td>
 							<td>{{ projeto.data }}</td>
 							<td>{{ projeto.usuario }}</td>
