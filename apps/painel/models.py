@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.sitemaps import ping_google
 
 class Publicacao(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -24,6 +25,13 @@ class Projeto(models.Model):
 	def __str__(self):
 	    return str(self.titulo)
 
+	def save(self, force_insert=False, force_update=False):
+		super(Projeto, self).save(force_insert, force_update)
+		try:
+			pring_google()
+		except Exception:
+			pass
+
 
 class Album(models.Model):
 	usuario = models.ForeignKey(User)
@@ -35,9 +43,24 @@ class Album(models.Model):
 	def __str__(self):
 	    return str(self.titulo)
 
+	def save(self, force_insert=False, force_update=False):
+		super(Album, self).save(force_insert, force_update)
+		try:
+			pring_google()
+		except Exception:
+			pass
+
 
 class Imagem(models.Model):
 	album = models.ForeignKey(Album)
 	imagem = models.ImageField('Foto')
 
+	def __str__(self):
+	    return str(self.imagem)
 
+	def save(self, force_insert=False, force_update=False):
+		super(Imagem, self).save(force_insert, force_update)
+		try:
+			pring_google()
+		except Exception:
+			pass
