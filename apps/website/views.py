@@ -40,18 +40,12 @@ class Sobre(View):
     	return render (request, 'sobre.html', context) 
 
 
-
-class Participe(View):
-    def get(self, request):
-    	context = {}
-    	return render (request, 'participe.html', context)   
-
-
 class Galeria(View):
 	def get(self, request, pk):
 		imagens = Imagem.objects.filter(album=pk)
 		context = {'imagens':imagens}
 		return render(request, 'galeria/galeria.html', context)
+
 
 class ListaGaleria(View):
 	def get(self, request):
@@ -69,7 +63,6 @@ class ListaGaleria(View):
 			
 		context = {'galeria':galeria}
 		return render(request, 'galeria/list.html', context)
-
 
 
 class Noticia(View):
