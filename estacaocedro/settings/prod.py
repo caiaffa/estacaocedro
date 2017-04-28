@@ -1,7 +1,9 @@
 from .base import *
 import os
 
+SITE_ID = 1
 DOMAIN = 'estacaocedro.com.br'
+NAME = 'estacaocedro'
 
 DATABASES = {
     'default': {
@@ -13,7 +15,7 @@ DATABASES = {
     }
 }
 
-INTERNAL_IPS = ('127.0.0.1')
+INTERNAL_IPS = ('127.0.0.1', '45.55.192.213')
 
 ALLOWED_HOSTS = ('*')
 
