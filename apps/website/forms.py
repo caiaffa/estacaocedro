@@ -17,7 +17,7 @@ class ContatoForm(forms.ModelForm):
         self.fields['email'].widget.attrs['class'] = 'form-control'
         self.fields['email'].widget.attrs['placeholder'] = 'E-mail'
 
-        self.fields['telefone'].widget.attrs['class'] = 'form-control'
+        self.fields['telefone'].widget.attrs['class'] = 'form-control celular'
         self.fields['telefone'].widget.attrs['placeholder'] = 'Telefone'
         self.fields['telefone'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 
