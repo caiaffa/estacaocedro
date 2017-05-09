@@ -35,7 +35,7 @@
 						<div class="col-lg-12">
 							<h5 class="m-t-lg with-border">
 							 Album {{ imagem.album.titulo }}
-			                 <a class="like pull-right" href="{% url 'painel:album-delete' imagem.album.pk %}">
+			                 <a class="like pull-right" href="{% url 'painel:album-deletar' imagem.album.pk %}">
 			                    <i class="font-icon font-icon-trash"></i>
 			                 </a>
 			                 <a class="like pull-right" style="margin-right:10px;" href="{% url 'painel:album-editar' imagem.album.pk %}">
@@ -53,7 +53,7 @@
 								<p class="gallery-item-title">{{ imagem.album.titulo }}</p>
 								<p>{{ imagem.album.categoria }}</p>
 								<div class="btn-group">
-									<a href="{% url 'painel:foto-delete' imagem.pk %}" >
+									<a href="{% url 'painel:foto-deletar' imagem.pk %}" >
 										<button class="btn" type="button">
 											<i class="font-icon font-icon-trash"></i>
 										</button>

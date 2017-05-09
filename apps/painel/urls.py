@@ -41,6 +41,12 @@ urlpatterns = [
     url(r'^album/$', login_required(views.AlbumList.as_view()), name='album-listar'),
     url(r'^album/cadastrar/$', login_required(views.AlbumRegister.as_view()), name='album-cadastrar'),
     url(r'^album/editar/(?P<pk>\d+)/$', login_required(views.AlbumEdit.as_view()), name='album-editar'),
-    url(r'^album/delete/(?P<pk>\d+)/$', login_required(views.AlbumDelete.as_view()), name='album-delete'),
-    url(r'^foto/delete/(?P<pk>\d+)/$', login_required(views.FotoDelete.as_view()), name='foto-delete'),
+    url(r'^album/delete/(?P<pk>\d+)/$', login_required(views.AlbumDelete.as_view()), name='album-deletar'),
+    url(r'^foto/delete/(?P<pk>\d+)/$', login_required(views.FotoDelete.as_view()), name='foto-deletar'),
+
+    # URLS ALBUM
+    url(r'^telefone/$', login_required(views.TelefoneList.as_view()), name='telefone-listar'),
+    url(r'^telefone/cadastrar/$', login_required(views.TelefoneRegister.as_view()), name='telefone-cadastrar'),
+    url(r'^telefone/editar/(?P<pk>\d+)/$', login_required(views.TelefoneEdit.as_view()), name='telefone-editar'),
+    url(r'^telefone/delete/(?P<pk>\d+)/$', login_required(views.TelefoneDelete.as_view()), name='telefone-deletar'),
 ]
