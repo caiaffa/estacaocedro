@@ -37,10 +37,14 @@
 								End. Rua Adelino Alves Saldanha, 562, Cedro - Areal - RJ
 							</adress>
 						</li>
-						<li>
-							<i class="icon-phone2"></i>
-							<a href="tel:">(24) xxxx-xxxx</a>
-						</li>
+						{% if telefones %}
+							<li>
+								<i class="icon-phone2"></i>
+								{% for telefone in telefones %}
+									<a href="tel:+55{{telefone.get_numero}}">{{telefone}}</a><br/>
+								{% endfor %}
+							</li>
+						{% endif %}
 						<li>
 							<i class="icon-mail"></i>
 							<a href="mailto:ong.cedro.areal@gmail.com">ong.cedro.areal@gmail.com</a>

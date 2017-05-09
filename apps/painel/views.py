@@ -12,10 +12,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.utils import timezone
 import json
 
-from apps.website.models import Contato, Doacao
-from apps.website.forms import ContatoForm, DoacaoForm
-from .models import Publicacao, Projeto, Imagem, Album
-from .forms import PublicacaoForm, LoginForm, ProjetoForm, AlbumForm, UsuarioForm, ChangePasswordForm
+from apps.website.models import *
+from apps.website.forms import *
+from .models import *
+from .forms import *
 
 
 class Home(View):
@@ -362,3 +362,61 @@ class FotoDelete(View):
     def get(self, request, pk):
         Imagem.objects.get(pk=pk).delete()
         return redirect(reverse_lazy("painel:album-listar"))
+
+
+
+class TelefoneRegister(View):
+    def get(self, request):
+        form = TelefoneForm()
+        context = {'form':form}
+        return render (request, 'telefone/register.html', context)
+
+    def post(self, request):
+        form = TelefoneForm(request.POST)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:telefone-listar"))
+        else:
+            return render (request, 'telefone/register.html', context)
+
+class TelefoneEdit(View):
+    def get(self, request, pk):
+        telefone = Telefone.objects.get(pk=pk)
+        form = TelefoneForm(instance=telefone)
+        context = {'form':form, 'telefone':telefone}
+        return render (request, 'telefone/edit.html', context)
+
+    def post(self, request, pk):
+        telefone = Telefone.objects.get(pk=pk)
+        form = TelefoneForm(request.POST, instance=telefone)
+        context = {'form':form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.usuario = request.user
+            obj.save()
+            return redirect(reverse_lazy("painel:telefone-listar"))
+        else:
+            return render (request, 'telefone/edit.html', context)
+
+class TelefoneList(View):
+    def get(self, request):
+        obj_list = Telefone.objects.all().order_by('-data')
+
+        paginator = Paginator(obj_list, 25)
+        page = request.GET.get('page')
+        try:
+            telefones = paginator.page(page)
+        except PageNotAnInteger:
+            telefones = paginator.page(1)
+        except EmptyPage:
+            telefones = paginator.page(paginator.num_pages)
+        context = {'telefones': telefones}
+        return render(request, 'telefone/list.html', context)
+
+class TelefoneDelete(View):
+    def get(self, request, pk):
+        telefones = Telefone.objects.get(pk=pk).delete()
+        return redirect(reverse_lazy("painel:telefone-listar"))
