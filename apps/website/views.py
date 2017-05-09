@@ -88,11 +88,12 @@ class Contato(View):
 
 	def post(self, request, *args, **kwargs):
 		form = ContatoForm(request.POST)
+		telefones = Telefone.objects.all()
 		if form.is_valid():
 			obj = form.save(commit=False)
 			obj.save()
 		form = ContatoForm()
-		context = {'form':form, 'message':True}
+		context = {'form':form, 'message':True, 'telefones':telefones}
 		return render (request, 'contato.html', context)
 
 

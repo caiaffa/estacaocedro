@@ -21,7 +21,9 @@
 			<div class="col-md-12 text-center heading-section">
 				<h3>Obrigado pelo contato.</h3>
 				<p>
-					Retornaremos o mais breve possível. Se precisar entrar em contato ligue para <a href="tel:+5524992383471">(24) 99238-3471</a>, envie um email para <a href="mailto:cedroestacao@gmail.com">cedroestacao@gmail.com</a>, ou pelo no site clicando <a href="{% url 'website:contato' %}">aqui</a>.
+					Retornaremos o mais breve possível. Se precisar entrar em contato {% if telefones %} ligando para {% for telefone in telefones %} <a href="tel:+55{{telefone.get_numero}}">{{telefone}}</a>, {% endfor %} ou {% endif %} envie um email para <a href="mailto:cedroestacao@gmail.com">cedroestacao@gmail.com</a>. 
+					<br/>
+					Você também pode deixar sujestões ou falar conosco pelo nosso website clicando <a href="{% url 'website:contato' %}">aqui</a>.
 				</p>
 			</div>
 		</div>
