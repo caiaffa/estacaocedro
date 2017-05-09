@@ -8,8 +8,8 @@ from datetime import datetime, timedelta, date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
-from .forms import ContatoForm, DoacaoForm
-from apps.painel.models import Publicacao, Projeto, Album, Imagem
+from .forms import *
+from apps.painel.models import *
 
 
 class Home(View):
@@ -82,7 +82,8 @@ class ListaNoticias(View):
 class Contato(View):
 	def get(self, request):
 		form = ContatoForm
-		context = {'form':form, 'message':False}
+		telefones = Telefone.objects.all()
+		context = {'form':form, 'message':False, 'telefones':telefones}
 		return render (request, 'contato.html', context)
 
 	def post(self, request, *args, **kwargs):

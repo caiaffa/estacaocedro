@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User as Usuario
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
-from .models import Publicacao, Projeto, Album
+from .models import *
 
 class UsuarioForm(UserCreationForm):
 	class Meta:
@@ -121,3 +121,16 @@ class AlbumForm(forms.ModelForm):
 		self.fields['data_album'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		self.fields['categoria'].widget.attrs['data-validation'] = '[NOTEMPTY]'
 		
+
+class TelefoneForm(forms.ModelForm):
+	class Meta:
+		model = Telefone
+		fields = ['numero']
+
+	def __init__(self, *args, **kwargs):
+		super(TelefoneForm, self).__init__(*args, **kwargs)
+		self.fields['numero'].widget.attrs['class'] = 'form-control celular'
+
+		self.fields['numero'].widget.attrs['placeholder'] = 'Numero do telefone com DDD.'
+
+		self.fields['numero'].widget.attrs['data-validation'] = '[NOTEMPTY]'

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sitemaps import ping_google
+import re
 
 class Publicacao(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -64,3 +65,14 @@ class Imagem(models.Model):
 			pring_google()
 		except Exception:
 			pass
+
+class Telefone(models.Model):
+	numero = models.CharField('Número', max_length=50, unique=True)
+	usuario = models.ForeignKey(User)
+	data = models.DateTimeField('Data de Criação', default=timezone.now)
+
+	def __str__(self):
+	    return str(self.numero)
+
+	def get_numero(self):
+		return re.sub('[^0-9]', '', self.numero)
