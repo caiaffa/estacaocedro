@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow:
+Allow: /static/site/
+
+Sitemap: http://www.estacaocedro.com.br/sitemap-static.xml
